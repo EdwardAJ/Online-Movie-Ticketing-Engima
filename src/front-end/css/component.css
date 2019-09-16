@@ -1,16 +1,11 @@
 /* This is styling for component such as buttons, modals, etc */
 .modal-auth{
-    min-width: 320px;
-    min-height: 320px;
+    width: 320px;
     padding: 30px;
     border-radius: 10px;
     background: white;
     box-shadow: 1px -1px 3px 0px #00000033, 
                 -1px 2px 3px 0px rgba(0, 0, 0, 0.2);
-}
-
-.label {
-    text-align: left;
 }
 
 #welcome{
@@ -24,25 +19,27 @@
     margin-bottom: 0rem;
 }
 
+.footer-form {
+    font-size: 0.85rem;
+}
+
 .input{
     width: 100%; 
-    margin-top:0.3rem;
+    margin-top: 0.3rem;
     margin-bottom: 1rem;
     padding: 0.9rem 0.9rem; 
-    display: block;  
-    border: none;
     border: 1px solid #ccc; 
     border-radius: 0.5rem;
-    box-sizing: border-box; 
-    text-align: left;
 }
 
 .lab {
-    /* margin: 0 auto;
-     */
     text-align: left;
-    /* display: block; */
 }
+
+.font-blue {
+    color: blue;
+}
+
 .button{
     width: 100%; 
     padding: 0.9rem 0.9rem;

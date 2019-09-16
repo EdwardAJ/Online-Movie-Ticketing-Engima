@@ -2,7 +2,7 @@
 .wrapper {
     display: flex;
     height: 100vh;
-    min-height: 640px;
+    min-height: 500px;
 }
 
 .center {

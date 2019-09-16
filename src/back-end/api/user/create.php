@@ -7,41 +7,89 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 include_once '../../config/database_connection.php';
 include_once '../../models/user.php';
 
+
+/*
+ *  Database initialization
+ */
 $database = new Database();
-$msg = '';
-// Connect to database
+$error = '';
 $connection = $database->connect();
-$product= new User($connection);
+
+/*
+ * User initialization
+ */
+$user = new User($connection);
+
+/*
+ * Fetch data from frontend
+ */
 $data = json_decode(file_get_contents("php://input"));
-// Validation of user's attributes:
+
+/*
+ * Validation of user's attributes
+ */
+
 // Username validation:
-$user->username = $data->username;
-if(preg_match('/^[a-zA-Z0-9]$/', $user->username)) { 
-    $msg = "Username can only contain letters, numbers, and underscores.";
+if (!preg_match('/^[a-zA-Z0-9]$/', $data->username)) { 
+    $error = "Username can only contain letters, numbers, and underscores.";
+} else {
+    $user->username = $data->username;
 }
 // Email validation:
-$user->email = $data->email;
-if (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $user->email)) {
-    $msg = "Invalid Email Format";
+if (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $data->email)) {
+    $error = "Invalid Email Format";
+} else {
+    $user->email = $data->email;
 }
+
 // Phone number validation:
-$user->no_hp = $data->no_hp;
-if (!preg_match("/^(\d{9}|\d{12})$/")) {
-    $msg = "Phone number can only contain numbers (9-12 digits).";
+if (!preg_match("/^(\d{9}|\d{12})$/", $data->no_hp)) {
+    $error = "Phone number can only contain numbers (9-12 digits).";
+} else {
+    $user->no_hp = $data->no_hp;
 }
-$user->picture_profile = $data->picture_profile;
-if (!$user->picture_profile) {
-    $msg = "Picture profile is required.";
+
+if (!$data->picture_profile) {
+    $error = "Picture profile is required.";
+} else {
+    $user->picture_profile = $data->picture_profile;
 }
-$user->password = password_hash($data->password, PASSWORD_DEFAULT);
-if (!$user->picture_profile) {
-    $msg = "Password is required.";
+
+// Do not store user's password directly!
+if (!$data->password) {
+    $error = "Password is required.";
+} else {
+    $user->password = password_hash($data->password, PASSWORD_DEFAULT);
 }
-// Return 200 response
-if ($msg != '') {
-    $response = [
-        "status" => "OK",
-        "message" => "User Created."
-    ]
+
+/*
+ * Return JSON to frontend! [PLAN TO REFACTOR]
+ */
+
+if ($error != '') {
+    // Call user's create method.
+    $status = $user->create();
+    if ($status == '200') {
+        echo json_encode(
+            array(
+                "status_code" => 200,
+                "message" => "User has been successfully created."
+            )
+        );
+    } else {
+        echo json_encode(
+            array(
+                "status_code" => 200,
+                "message" => $status
+            )
+        );
+    }
+} else {
+    echo json_encode(
+        array(
+            "status_code" => 500,
+            "message" => $error
+        )
+    );
 }
 ?>
