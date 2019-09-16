@@ -8,6 +8,7 @@ include_once '../../config/database_connection.php';
 include_once '../../models/user.php';
 
 $database = new Database();
+$msg = '';
 // Connect to database
 $connection = $database->connect();
 $product= new User($connection);
@@ -35,5 +36,12 @@ if (!$user->picture_profile) {
 $user->password = password_hash($data->password, PASSWORD_DEFAULT);
 if (!$user->picture_profile) {
     $msg = "Password is required.";
+}
+// Return 200 response
+if ($msg != '') {
+    $response = [
+        "status" => "OK",
+        "message" => "User Created."
+    ]
 }
 ?>
