@@ -1,0 +1,15 @@
+/* Style for login page */
+.wrapper {
+    display: flex;
+    height: 100vh;
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+p {
+    font-family: 'Calibri';
+}
