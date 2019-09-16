@@ -12,20 +12,12 @@
             $this->connection = $connection;
         }
         // Create User
-        public function create() {
-
-        }
+        public function create() {}
         // Read User
-        public function read() {
-
-        }
+        public function read() {}
         // Update User
-        public function update() {
-
-        }
+        public function update() {}
         // Delete User
-        public function delete() {
-            
-        }
+        public function delete() {}
     }
 ?>
