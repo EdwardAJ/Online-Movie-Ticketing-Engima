@@ -1,0 +1,9 @@
+/* Style for login page */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* p {
+    font-family: 'Calibri'; */
+}
