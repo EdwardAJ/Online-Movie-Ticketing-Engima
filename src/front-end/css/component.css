@@ -62,5 +62,15 @@ a:-webkit-any-link{
     color:white;
 }
 
-
-
+.wrong-message{
+    color: rgb(228,1,2);
+    margin-bottom: 0.5rem;
+    margin-top: 0rem;
+    font-family: Lato;
+    font-weight: 600;
+    text-align: left;
+    font-size: 12px;
+}
+.input.wrong{
+    margin-bottom: 0.5rem;
+}
