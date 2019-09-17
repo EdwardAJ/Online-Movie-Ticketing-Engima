@@ -14,7 +14,6 @@ include_once '../../models/user.php';
 $database = new Database();
 $error = '';
 $connection = $database->connect();
-
 /*
  * User initialization
  */
@@ -24,13 +23,12 @@ $user = new User($connection);
  * Fetch data from frontend
  */
 $data = json_decode(file_get_contents("php://input"));
-
 /*
  * Validation of user's attributes
  */
 
 // Username validation:
-if (!preg_match('/^[a-zA-Z0-9]$/', $data->username)) { 
+if (!preg_match('/^[a-zA-Z0-9_]+$/', $data->username)) { 
     $error = "Username can only contain letters, numbers, and underscores.";
 } else {
     $user->username = $data->username;
@@ -48,7 +46,6 @@ if (!preg_match("/^(\d{9}|\d{12})$/", $data->no_hp)) {
 } else {
     $user->no_hp = $data->no_hp;
 }
-
 if (!$data->picture_profile) {
     $error = "Picture profile is required.";
 } else {
@@ -65,10 +62,9 @@ if (!$data->password) {
 /*
  * Return JSON to frontend! [PLAN TO REFACTOR]
  */
-
-if ($error != '') {
+if (!$error) {
     // Call user's create method.
-    $status = $user->create();
+    $status = $user->create($database->connection);
     if ($status == '200') {
         echo json_encode(
             array(
@@ -79,7 +75,7 @@ if ($error != '') {
     } else {
         echo json_encode(
             array(
-                "status_code" => 200,
+                "status_code" => 500,
                 "message" => $status
             )
         );
