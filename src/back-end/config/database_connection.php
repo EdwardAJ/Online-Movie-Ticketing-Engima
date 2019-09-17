@@ -1,18 +1,19 @@
 <?php
     class Database {
         // Engima Database Parameters
-        private $host = 'localhost';
-        private $user_name = 'root';
-        private $password = '';
+        private $host = '127.0.0.1';
+        private $port = '3306';
+        private $username = 'root';
+        private $password = 'root';
         private $db_name = 'engima';
         public $connection;
         // Connect Database
         public function connect() {
-            $this->connection = null;
-            try {
-                $this->connection = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name . ';charset=utf8');
-            } catch (PDOException $e) {
-                echo 'Connection Error: ' . $e->getMessage();
+            $this->connection = mysqli_connect($this->host, $this->username, $this->password, $this->db_name);
+            if (!$this->connection) {
+                echo "Connection failed: " . mysqli_connect_error();
+            } else {
+                echo "Connected successfully!";
             }
         }
     }
