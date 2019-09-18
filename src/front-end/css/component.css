@@ -1,1 +1,82 @@
 /* This is styling for component such as buttons, modals, etc */
+.modal-auth{
+    width: 320px;
+    padding: 30px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 1px -1px 3px 0px #00000033, 
+                -1px 2px 3px 0px rgba(0, 0, 0, 0.2);
+    font-family: 'Raleway';
+}
+
+#welcome{
+    margin: 2rem 1rem; 
+    /* font-family: 'Lato'; */
+}
+
+.container-form{
+    font-size: 14px;
+    padding-top: 0px;
+    margin-top: 0.2rem;
+    margin-bottom: 0rem;
+}
+
+.footer-form {
+    font-size: 0.85rem;
+    
+}
+
+.footer{
+    /* font-family: 'Lato'; */
+}
+.input{
+    width: 100%; 
+    margin-top: 0.3rem;
+    margin-bottom: 1rem;
+    padding: 0.9rem 0.9rem; 
+    border: 1px solid #ccc; 
+    border-radius: 0.5rem;
+    
+}
+
+.lab {
+    text-align: left;
+    color: rgb(99,99,99);
+}
+
+a:-webkit-any-link{
+    color: rgb(0, 192, 236);
+    text-decoration: none;
+    font-style: black;
+}
+
+.button{
+    width: 100%; 
+    padding: 0.9rem 0.9rem;
+    margin-top: 1rem;
+    border-radius: 5px;
+    border-color: rgb(0, 192, 236);
+    margin-bottom: 1rem;
+    /* font-family: Lato; */
+    font-size:1rem;
+    background: rgb(0, 192, 236);
+    color:white;
+}
+
+.wrong-message{
+    color: rgb(228,1,2);
+    margin-bottom: 0.5rem;
+    margin-top: 0rem;
+    /* font-family: Lato; */
+    font-weight: 600;
+    text-align: left;
+    font-size: 12px;
+}
+.input.wrong{
+    margin-bottom: 0.5rem;
+}
+
+::placeholder{
+    color:rgb(173,173,173);
+    font-family: 'Raleway';
+}
