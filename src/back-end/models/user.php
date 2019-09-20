@@ -11,22 +11,15 @@
         public function __construct ($database) {
             $this->connection = $database;
         }
-        // Create User
-        public function create($database) {
+        // Register User
+        public function register($database) {
             $query = "INSERT INTO " . $this->table
                      . " VALUES " . "('" . $this->username. "', '" . $this->email . "', '" . $this->no_hp . "', '" . $this->picture_profile . "', '" . $this->password . "')";
-            echo 'query: ' . $query; 
             if (mysqli_query($database, $query)) {
                 return '200';
             } else {
                 return 'Error ' . mysqli_error($database);
             }
         }
-        // Read User
-        public function read() {}
-        // Update User
-        public function update() {}
-        // Delete User
-        public function delete() {}
     }
 ?>
