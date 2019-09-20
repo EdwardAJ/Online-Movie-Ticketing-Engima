@@ -1,6 +1,6 @@
 /* This is styling for component such as buttons, modals, etc */
 .modal-auth{
-    width: 320px;
+    width: 365px;
     padding: 30px;
     border-radius: 10px;
     background: white;
@@ -18,7 +18,7 @@
     font-size: 14px;
     padding-top: 0px;
     margin-top: 0.2rem;
-    margin-bottom: 0rem;
+    margin-bottom: 1rem;
 }
 
 .footer-form {
@@ -26,22 +26,22 @@
     
 }
 
-.footer{
-    /* font-family: 'Lato'; */
-}
 .input{
     width: 100%; 
-    margin-top: 0.3rem;
-    margin-bottom: 1rem;
-    padding: 0.9rem 0.9rem; 
+    margin-top: 0.5rem;
+    margin-bottom: 0.2rem;
+    padding: 0.7rem 1rem; 
     border: 1px solid #ccc; 
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
     
 }
 
 .lab {
     text-align: left;
     color: rgb(99,99,99);
+    font-weight: normal;
+    font-size: 12px;
+    margin-bottom: 0.3rem;
 }
 
 a:-webkit-any-link{
@@ -53,19 +53,33 @@ a:-webkit-any-link{
 .button{
     width: 100%; 
     padding: 0.9rem 0.9rem;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     border-radius: 5px;
     border-color: rgb(0, 192, 236);
-    margin-bottom: 1rem;
-    /* font-family: Lato; */
-    font-size:1rem;
+    font-family: 'Raleway';
+    font-size: 13px;
     background: rgb(0, 192, 236);
     color:white;
 }
 
+.browse {
+    width: 49%; 
+    padding: 0.6rem 0.6rem;
+    margin-top: 0.2rem;
+    margin-bottom: 0.2rem;
+    border-radius: 5px;
+    border-color: rgb(181,181,181);
+    background: rgb(181,181,181);
+    color:white;
+}
+
+.js {
+    width: 49%;
+}
 .wrong-message{
     color: rgb(228,1,2);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.1rem;
     margin-top: 0rem;
     /* font-family: Lato; */
     font-weight: 600;
@@ -73,7 +87,7 @@ a:-webkit-any-link{
     font-size: 12px;
 }
 .input.wrong{
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 ::placeholder{
