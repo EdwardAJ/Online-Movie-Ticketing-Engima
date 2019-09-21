@@ -4,6 +4,7 @@ allErrorIDs = [
     'wrong-email',
     'wrong-no_hp',
     'wrong-password',
+    'wrong-reconfirm_password',
     'wrong-picture_profile'
 ]
 
@@ -29,9 +30,24 @@ function fetchInformation () {
     var email = document.getElementById("email").value;
     var phone = document.getElementById("phone").value;
     var password = document.getElementById("password").value;
-    var reconfirm = document.getElementById("reconfirmPassword").value;
+    var reconfirmPassword = document.getElementById("reconfirmPassword").value;
     var picture = document.getElementById("pic").value;
-    sendInformationToBackEnd (username, email, phone, password, picture);
+    if (validatePasswords(password, reconfirmPassword)) {
+        sendInformationToBackEnd(username, email, phone, password, picture);
+    } else {
+        showPasswordErrorsHTMLContents();
+    }
+}
+
+// Front-end validation of password and reconfirm password.
+function validatePasswords (password, reconfirmPassword) {
+    return password === reconfirmPassword;
+}
+
+// Show front-end error.
+function showPasswordErrorsHTMLContents () {
+    document.getElementById('wrong-password').innerHTML = 'Passwords do not match';
+    document.getElementById('wrong-reconfirm_password').innerHTML = 'Passwords do not match.';
 }
 
 // This function utilizes AJAX to send to backend server.
