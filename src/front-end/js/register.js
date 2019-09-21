@@ -1,24 +1,49 @@
-function startInformationSendingSequence () {
+// Error IDs array to be reset and shown in HTML.
+allErrorIDs = [
+    'wrong-username',
+    'wrong-email',
+    'wrong-no_hp',
+    'wrong-password',
+    'wrong-picture_profile'
+]
+
+document.getElementById('registerButton').addEventListener('click', function () {
+    startInformationSendSequence();
+})
+
+// When register button is clicked, this function is called first.
+function startInformationSendSequence () {
+    resetDocumentContent();
     fetchInformation();
+}
+
+// Reset all error text in HTML to ''
+function resetDocumentContent () {
+    allErrorIDs.forEach(wrongID => {
+        document.getElementById(wrongID).innerHTML = '';
+    })
 }
 
 function fetchInformation () {
     var username = document.getElementById("username").value;
     var email = document.getElementById("email").value;
     var phone = document.getElementById("phone").value;
-    var password = document.getElementById("phone").value;
-    var reconfirm = document.getElementById("reconfirm").value;
+    var password = document.getElementById("password").value;
+    var reconfirm = document.getElementById("reconfirmPassword").value;
     var picture = document.getElementById("pic").value;
     sendInformationToBackEnd (username, email, phone, password, picture);
 }
 
+// This function utilizes AJAX to send to backend server.
 function sendInformationToBackEnd (username, email, phone, password, picture) {
     var payload = makeRegisterJSON(username, email, phone, password, picture);
     var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() { // Call a function when the state changes.
+    // Call a function when the state changes.
+    xhr.onreadystatechange = function() {
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var response = this.responseText;
-            console.log('response: ', JSON.parse(response));
+            var response = JSON.parse(this.responseText);
+            // Backend returns JSON, handled by following function:
+            handleRegisterResponse(response);
         }
     }
     xhr.open("POST", 'http://localhost:8080/user/register');
@@ -36,6 +61,33 @@ function makeRegisterJSON (username, email, phone, password, picture) {
     }
 }
 
-document.getElementById('registerButton').addEventListener('click', function () {
-    sendInformationToBackEnd();
-})
+function handleRegisterResponse (response) {
+    // 200 means successful status code!
+    if (response.status_code == '200') {
+        handleSuccessResponse(response);
+    } else {
+        handleBadResponse(response);
+    }
+}
+// Annotate all wrong attributes (username, email, password, etc.)
+// errorIDs is an object: key = <error-ID such as 'wrong-username' > and value = error message
+function handleBadResponse (response) {
+    var errorIDs = {};
+    Object.keys(response['message']).forEach(key => {
+        let wrongID = 'wrong-' + key;
+        errorIDs[wrongID] = response['message'][key];
+    })
+    changeWrongContents(errorIDs);
+}
+
+// Change error text in HTML, assign it with messages from the backend.
+function changeWrongContents (errorIDs) {
+    Object.keys(errorIDs).forEach(wrongID => {
+        document.getElementById(wrongID).innerHTML = errorIDs[wrongID];
+    })
+}
+
+// User has been created in MYSQL.
+function handleSuccessResponse (response) {
+    alert(response['message']);
+}

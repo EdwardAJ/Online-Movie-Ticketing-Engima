@@ -15,6 +15,7 @@
                     <label>Username</label>
                 </div>
                 <input type ="text" id = "username" class ="input" pattern="[a-zA-Z0-9_]*" placeholder="joe.johndoe" required/> 
+                <p id="wrong-username" class="wrong-message"></p>
             </div>
 
             <!-- Email -->
@@ -23,6 +24,7 @@
                     <label>Email Address</label>
                 </div>
                 <input type ="email" id = "email" class = "input" placeholder="joe@email.com" required/>
+                <p id="wrong-email" class="wrong-message"></p>
             </div>
             
             <!-- Phone Number -->
@@ -31,6 +33,7 @@
                     <label>Phone Number</label>
                 </div>
                 <input type ="tel" id="phone" class= "input" placeholder="+62813xxxxxxxx" pattern="[\+][0-9].{8,11}"required/>  
+                <p id="wrong-no_hp" class="wrong-message"></p>
             </div>
 
             <!-- Password -->
@@ -39,6 +42,7 @@
                     <label>Password</label>
                 </div>
                 <input type ="password" id="password" class= "input" placeholder="make as strong as possible" required/>
+                <p id="wrong-password" class="wrong-message"></p>
             </div>
         
             <!-- Confirm Password-->
@@ -57,6 +61,7 @@
                     <input class="input input-js" type="text" id="pic" required> 
                     <button class="button-browse" type="submit">Browse</button>
                 </span>
+                <p id="wrong-picture_profile" class="wrong-message"></p>
             </div>
             <button id="registerButton" class="button-auth" type ="submit">Register</button>
             <div class="footer-form">
