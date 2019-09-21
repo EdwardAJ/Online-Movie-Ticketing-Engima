@@ -14,7 +14,7 @@
                 <div class="lab">
                     <label>Username</label>
                 </div>
-                <input type ="text" name = "username" class = "input" pattern="[a-zA-Z0-9_]*" placeholder="joe.johndoe" required/> 
+                <input type ="text" id = "username" class ="input" pattern="[a-zA-Z0-9_]*" placeholder="joe.johndoe" required/> 
             </div>
 
             <!-- Email -->
@@ -22,7 +22,7 @@
                 <div class="lab">
                     <label>Email Address</label>
                 </div>
-                <input type ="email" name = "email" class = "input" placeholder="joe@email.com" required/>
+                <input type ="email" id = "email" class = "input" placeholder="joe@email.com" required/>
             </div>
             
             <!-- Phone Number -->
@@ -30,7 +30,7 @@
                 <div class="lab">
                     <label>Phone Number</label>
                 </div>
-                <input type ="tel" class= "input" placeholder="+62813xxxxxxxx" pattern="[\+][0-9].{8,11}"required/>  
+                <input type ="tel" id="phone" class= "input" placeholder="+62813xxxxxxxx" pattern="[\+][0-9].{8,11}"required/>  
             </div>
 
             <!-- Password -->
@@ -38,7 +38,7 @@
                 <div class="lab">
                     <label>Password</label>
                 </div>
-                <input type ="password" class= "input" placeholder="make as strong as possible" required/>
+                <input type ="password" id="password" class= "input" placeholder="make as strong as possible" required/>
             </div>
         
             <!-- Confirm Password-->
@@ -46,7 +46,7 @@
                 <div class="lab">
                     <label>Confirm Password</label>
                 </div>
-                <input type ="tel" class= "input" placeholder="same as above" required/>  
+                <input type ="tel" id="reconfirmPassword" class= "input" placeholder="same as above" required/>  
             </div>
             <!-- Profile Picture -->
             <div class="container-form">
@@ -54,14 +54,15 @@
                     <label>Profile Picture</label>
                 </div> 
                 <span class="input-pic">
-                    <input class="input js" type="text" name="pic" required> 
-                    <button class="button browse" type="submit">Browse</button>
+                    <input class="input input-js" type="text" id="pic" required> 
+                    <button class="button-browse" type="submit">Browse</button>
                 </span>
             </div>
-            <button class="button" type ="submit">Register</button>
+            <button id="registerButton" class="button-auth" type ="submit">Register</button>
             <div class="footer-form">
                 <p class="footer"> <span> Already have an account? </span> <span class="font-blue"> <a href="login.html">Login here</a></span></p>
             </div>
         </div>
+        <script type="text/javascript" src="../js/register.js"></script>
     </div>
 </body>

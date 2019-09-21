@@ -15,10 +15,5 @@
                 echo "Connection failed: " . mysqli_connect_error();
             }
         }
-
-        // Get Connection
-        public function getConnection() {
-            return $this->connection;
-        }
     }
 ?>
