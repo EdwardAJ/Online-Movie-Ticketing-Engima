@@ -44,8 +44,9 @@ class user_Controller {
         if ($this->is_login_validated) {
             $status = $user->login($connection);
             if ($status === '200') {
-                $this->updateExpTime($connection);
-                $this->returnAccessTokenAttributes($user, $connection);
+                if ($this->updateExpTime($connection)) {
+                    $this->returnAccessTokenAttributes($user, $connection);
+                }
             } else {
                 $this->setLoginPasswordError($status);
             }
@@ -55,9 +56,19 @@ class user_Controller {
         }
     }
 
-    // private function updateExpiryTime(User $user, $connection) {
-
-    // }
+    private function updateExpiryTime(User $user, $connection) {
+        $date = date('Y-m-d H:i:s');
+        $newtimestamp = strtotime($date . '+ 15 minute');
+        $new_exptime = date('Y-m-d H:i:s', $newtimestamp);
+        $user->token_expdate = $new_exptime;
+        $status = $user->updateExpiryTime($connection);
+        if ($status == '200') {
+            return true;
+        } else {
+            returnResponse('500', 'Internal Server Error.');
+            return false;
+        }
+    }
 
     private function returnAccessTokenAttributes (User $user, $connection) {
         $token_arr = $user->getAuth($connection);

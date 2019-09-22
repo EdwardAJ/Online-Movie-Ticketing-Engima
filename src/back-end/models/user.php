@@ -43,7 +43,7 @@
         }
 
         // public function updateExpiryTime ($database) {
-            
+        //     $query = "SELECT "
         // }
 
         public function getAuth ($database) {

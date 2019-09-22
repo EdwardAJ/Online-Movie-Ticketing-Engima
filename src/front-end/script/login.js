@@ -43,7 +43,7 @@ function sendInformationToBackEnd (email, password) {
     xhr.send(JSON.stringify(payload));
 }
 
-function makeLoginJSON (username, email, phone, password, picture) {
+function makeLoginJSON (email, password) {
     return  {
         email: email,
         password: password
