@@ -42,9 +42,15 @@
             }
         }
 
-        // public function updateExpiryTime ($database) {
-        //     $query = "SELECT "
-        // }
+        public function updateExpiryTime ($database) {
+            $query = "UPDATE " . $this->table . " SET token_expdate = '" . $this->token_expdate . "' WHERE email = '" . $this->email . "';";
+            $result = mysqli_query($database, $query);
+            if ($result) {
+                return '200';
+            } else {
+                return '500';
+            }
+        }
 
         public function getAuth ($database) {
             $query = "SELECT token, token_expdate FROM " . $this->table . " WHERE email = '" . $this->email . "';";

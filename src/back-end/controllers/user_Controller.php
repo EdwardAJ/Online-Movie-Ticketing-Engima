@@ -44,7 +44,7 @@ class user_Controller {
         if ($this->is_login_validated) {
             $status = $user->login($connection);
             if ($status === '200') {
-                if ($this->updateExpTime($connection)) {
+                if ($this->updateExpiryTime($user, $connection)) {
                     $this->returnAccessTokenAttributes($user, $connection);
                 }
             } else {
