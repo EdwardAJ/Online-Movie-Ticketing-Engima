@@ -50,7 +50,7 @@
                 <div class="lab">
                     <label>Confirm Password</label>
                 </div>
-                <input type ="tel" id="reconfirmPassword" class= "input" placeholder="same as above" required/>  
+                <input type ="password" id="reconfirmPassword" class= "input" placeholder="same as above" required/>  
                 <p id="wrong-reconfirm_password" class="wrong-message"></p>
             </div>
             <!-- Profile Picture -->
@@ -59,8 +59,9 @@
                     <label>Profile Picture</label>
                 </div> 
                 <span class="input-pic">
-                    <input class="input input-js" type="text" id="pic" required> 
-                    <button class="button-browse" type="submit">Browse</button>
+                    <input id="file-name" class="input input-js" type="text"required> 
+                    <input class="input input-js file-uploader" type="file" id="pic" required> 
+                    <button id= "browseButton" class="button-browse" type="submit">Browse</button>
                 </span>
                 <p id="wrong-picture_profile" class="wrong-message"></p>
             </div>

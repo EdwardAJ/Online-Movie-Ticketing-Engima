@@ -76,6 +76,11 @@ a:-webkit-any-link{
 .input-js {
     width: 49%;
 }
+
+.file-uploader {
+    display: none;
+}
+
 .wrong-message{
     color: rgb(228,1,2);
     margin-bottom: 0.1rem;

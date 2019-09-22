@@ -12,6 +12,30 @@ document.getElementById('registerButton').addEventListener('click', function () 
     startInformationSendSequence();
 })
 
+document.getElementById('browseButton').addEventListener('click', function () {
+    uploadFile();
+})
+
+function uploadFile () {
+    // Click input type = "text"
+    document.getElementById('pic').click();
+    var path = document.getElementById('pic').value;
+    // Replace "fakepath" from path.
+    var filename = path.replace(/^.*\\/, "");
+    // Set text box beside browse button's value to filename
+    refreshFileUpload(filename); 
+    document.getElementById('file-name').value = filename;
+}
+
+function refreshFileUpload (filename) {
+    // var req = new XMLHttpRequest();
+    // req.open("POST", "address_for_div_content", true);
+    // req.onreadystatechange = function () {
+    //     if (req.readyState != 4 || req.status != 200) return;
+    //     document.getElementById('file-name').value = filename;
+    // }
+}
+
 // When register button is clicked, this function is called first.
 function startInformationSendSequence () {
     resetDocumentContent();
@@ -105,5 +129,11 @@ function changeWrongContents (errorIDs) {
 
 // User has been created in MYSQL.
 function handleSuccessResponse (response) {
-    alert(response['message']);
+    document.getElementById('username').style.borderColor = "green";
+    document.getElementById('email').style.borderColor = "green";
+    document.getElementById('phone').style.borderColor = "green";
+    document.getElementById('password').style.borderColor = "green";
+    document.getElementById('reconfirmPassword').style.borderColor = "green";
+    document.getElementById('file-name').style.borderColor = "green";
+    alert(response.message);
 }
