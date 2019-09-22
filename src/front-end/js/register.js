@@ -7,6 +7,8 @@ allErrorIDs = [
     'wrong-reconfirm_password',
     'wrong-picture_profile'
 ]
+// Global variable for picture profile
+var picture_global;
 
 document.getElementById('registerButton').addEventListener('click', function () {
     startInformationSendSequence();
@@ -21,8 +23,10 @@ document.getElementById('pic').onchange = function () {
     var filename = path.replace(/^.*\\/, "");
     // Show the value of filename in input text box
     document.getElementById('file-name').value = filename;
+    encodeImageFileAsURL(this, function(image) {
+        picture_global = image;
+    });
 }
-
 // When register button is clicked, this function is called first.
 function startInformationSendSequence () {
     resetDocumentContent();
@@ -42,7 +46,7 @@ function fetchInformation () {
     var phone = document.getElementById("phone").value;
     var password = document.getElementById("password").value;
     var reconfirmPassword = document.getElementById("reconfirmPassword").value;
-    var picture = document.getElementById("pic").value;
+    var picture = picture_global;
     if (validatePasswords(password, reconfirmPassword)) {
         sendInformationToBackEnd(username, email, phone, password, picture);
     } else {
@@ -91,7 +95,7 @@ function makeRegisterJSON (username, email, phone, password, picture) {
 function handleRegisterResponse (response) {
     // 200 means successful status code!
     if (response.status_code == '200') {
-        handleSuccessResponse(response);
+        handleSuccessResponse();
     } else {
         handleBadResponse(response);
     }
@@ -115,12 +119,21 @@ function changeWrongContents (errorIDs) {
 }
 
 // User has been created in MYSQL.
-function handleSuccessResponse (response) {
+function handleSuccessResponse () {
     document.getElementById('username').style.borderColor = "green";
     document.getElementById('email').style.borderColor = "green";
     document.getElementById('phone').style.borderColor = "green";
     document.getElementById('password').style.borderColor = "green";
     document.getElementById('reconfirmPassword').style.borderColor = "green";
     document.getElementById('file-name').style.borderColor = "green";
-    alert(response.message);
+}
+
+// This function is fetched from https://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
+function encodeImageFileAsURL(element, callback) {
+    var file = element.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function () {
+        callback(reader.result)
+    }
+    reader.readAsDataURL(file);
 }
