@@ -21,5 +21,18 @@
                 return 'Error ' . mysqli_error($database);
             }
         }
+
+        // Register validation for duplicates.
+        public function validateDuplicate ($database , $value, $attribute) {
+            $query = "SELECT " . $attribute . " FROM " . $this->table . " WHERE  "
+                     . $attribute . " =  " . "'" . $value . "'";
+            $execute = mysqli_query($database, $query);
+            $result = mysqli_fetch_array($execute);
+            if ($result) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 ?>
