@@ -25,6 +25,7 @@ document.getElementById('pic').onchange = function () {
     document.getElementById('file-name').value = filename;
     encodeImageFileAsURL(this, function(image) {
         picture_global = image;
+        console.log('pic: ', picture_global);
     });
 }
 // When register button is clicked, this function is called first.

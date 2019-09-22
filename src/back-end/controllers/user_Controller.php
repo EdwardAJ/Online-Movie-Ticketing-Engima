@@ -11,11 +11,12 @@ class user_Controller {
         $user = new User($connection);
         $data = json_decode(file_get_contents("php://input"));
         $this->validateUserAttributes($user, $data);
-        // Connecting to database
         if ($this->is_register_validated) {
-            // Check for duplicates in the table.
+            // Check for duplicates in the MYSQL table
             $this->validateDuplicatedUserAttributes($user, $connection);
             if ($this->is_register_validated) {
+                // Generate picture.
+                $user->picture_profile_path = $this->generatePicture($user->picture_profile, $user->username);
                 $status = $user->register($connection);
                 if ($status == '200') {
                     returnResponse($status, 'User has been successfully created.');
@@ -26,6 +27,29 @@ class user_Controller {
         }
         if (!$this->is_register_validated) {
             returnResponse('500', $this->register_error_array);
+        }
+    }
+
+    private function validateUserAttributes (User $user, $data) {
+        $user->username = $this->validateUsername($data->username);
+        if (!$user->username) {
+            $this->setUsernameError();
+        }
+        $user->email = $this->validateEmail($data->email);
+        if (!$user->email) {
+            $this->setEmailError();
+        }
+        $user->no_hp = $this->validatePhone($data->no_hp);
+        if (!$user->no_hp) {
+            $this->setPhoneError();
+        }
+        $user->picture_profile = $this->validatePicture($data->picture_profile);
+        if (!$user->picture_profile) {
+            $this->setPictureError();
+        }
+        $user->password = $this->validatePassword($data->password);
+        if (!$user->password) {
+            $this->setPasswordError();
         }
     }
 
@@ -68,6 +92,16 @@ class user_Controller {
         }
         return $validated;
     }
+    // https://stackoverflow.com/questions/15153776/convert-base64-string-to-an-image-file
+    private function generatePicture ($picture_data, $filename) {
+        $full_path = 'src/back-end/pictures/users/' . $filename;
+        $file = fopen($full_path, "wb");
+        $data = explode(',', $picture_data);
+        // Remove file headers.
+        fwrite($file, base64_decode($data[1]));
+        fclose($file);
+        return $full_path;
+    }
 
     private function setUsernameError () {
         $this->register_error_array['username'] = 'Username can only contain letters, numbers, and underscores.';
@@ -97,29 +131,6 @@ class user_Controller {
     private function setDuplicatedValueError ($value, $value_string) {
         $this->register_error_array[$value_string] = $value_string . ' ' .  $value . ' already exists. Please use another ' . $value_string . '.';
         $this->is_register_validated = false;
-    }
-
-    private function validateUserAttributes (User $user, $data) {
-        $user->username = $this->validateUsername($data->username);
-        if (!$user->username) {
-            $this->setUsernameError();
-        }
-        $user->email = $this->validateEmail($data->email);
-        if (!$user->email) {
-            $this->setEmailError();
-        }
-        $user->no_hp = $this->validatePhone($data->no_hp);
-        if (!$user->no_hp) {
-            $this->setPhoneError();
-        }
-        $user->picture_profile = $this->validatePicture($data->picture_profile);
-        if (!$user->picture_profile) {
-            $this->setPictureError();
-        }
-        $user->password = $this->validatePassword($data->password);
-        if (!$user->password) {
-            $this->setPasswordError();
-        }
     }
 
     private function validateDuplicatedUserAttributes (User $user, $connection) {

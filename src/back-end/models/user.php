@@ -7,6 +7,7 @@
         public $email;
         public $no_hp;
         public $picture_profile;
+        public $picture_profile_path;
         public $password;
         public function __construct ($database) {
             $this->connection = $database;
@@ -14,7 +15,7 @@
         // Register User
         public function register($database) {
             $query = "INSERT INTO " . $this->table
-                     . " VALUES " . "('" . $this->username. "', '" . $this->email . "', '" . $this->no_hp . "', '" . $this->picture_profile . "', '" . $this->password . "')";
+                     . " VALUES " . "('" . $this->username. "', '" . $this->email . "', '" . $this->no_hp . "', '" . $this->picture_profile_path . "', '" . $this->password . "')";
             if (mysqli_query($database, $query)) {
                 return '200';
             } else {
