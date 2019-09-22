@@ -17,6 +17,10 @@ class user_Controller {
             if ($this->is_register_validated) {
                 // Generate picture.
                 $user->picture_profile_path = $this->generatePicture($user->picture_profile, $user->username);
+                // Generate access token.
+                $user->token = $this->generateAccessToken();
+                // Generate current date.
+                $user->token_expdate = $this->generateExpDate();
                 $status = $user->register($connection);
                 if ($status == '200') {
                     returnResponse($status, 'User has been successfully created.');
@@ -101,6 +105,14 @@ class user_Controller {
         fwrite($file, base64_decode($data[1]));
         fclose($file);
         return $full_path;
+    }
+
+    private function generateAccessToken () {
+        return uniqid();
+    }
+
+    private function generateExpDate () {
+        return date('Y-m-d H:i:s');
     }
 
     private function setUsernameError () {
