@@ -15,13 +15,45 @@
             $this->connection = $database;
         }
         // Register User
-        public function register($database) {
+        public function register ($database) {
             $query = "INSERT INTO " . $this->table
                      . " VALUES " . "('" . $this->username. "', '" . $this->email . "', '" . $this->no_hp . "', '" . $this->picture_profile_path . "', '" . $this->password . "', '" . $this->token . "', '" . $this->token_expdate . "')";
             if (mysqli_query($database, $query)) {
                 return '200';
             } else {
                 return 'Error ' . mysqli_error($database);
+            }
+        }
+
+        public function login ($database) {
+            $query = "SELECT password  FROM " . $this->table . " WHERE email = '" . $this->email . "';";
+            // echo $query;
+            $execute = mysqli_query($database, $query);
+            $result = mysqli_fetch_array($execute);
+            if ($result) {
+                $hashed_password = $result[0];
+                $result = password_verify($this->password, $hashed_password);
+                if ($result) {
+                    return '200';
+                }
+            }
+            if (!$result) {
+                return 'Wrong Password.' ;
+            }
+        }
+
+        // public function updateExpiryTime ($database) {
+            
+        // }
+
+        public function getAuth ($database) {
+            $query = "SELECT token, token_expdate FROM " . $this->table . " WHERE email = '" . $this->email . "';";
+            $execute = mysqli_query($database, $query);
+            $result = mysqli_fetch_array($execute);
+            if ($result) {
+                return $result;
+            } else {
+                return '500';
             }
         }
 

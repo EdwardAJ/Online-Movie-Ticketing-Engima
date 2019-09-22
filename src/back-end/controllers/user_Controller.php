@@ -4,7 +4,10 @@ require_once 'src/back-end/models/user.php';
 
 class user_Controller {
     private $is_register_validated = true;
+    private $is_login_validated = true;
     private $register_error_array = array(
+    );
+    private $login_error_array = array(
     );
 
     public function register ($connection) {
@@ -34,33 +37,92 @@ class user_Controller {
         }
     }
 
+    public function login ($connection) {
+        $user = new User($connection);
+        $data = json_decode(file_get_contents("php://input"));
+        $this->validateLoginAttributes($user, $data);
+        if ($this->is_login_validated) {
+            $status = $user->login($connection);
+            if ($status === '200') {
+                $this->updateExpTime($connection);
+                $this->returnAccessTokenAttributes($user, $connection);
+            } else {
+                $this->setLoginPasswordError($status);
+            }
+        }
+        if (!$this->is_login_validated) {
+            returnResponse('500', $this->login_error_array);
+        }
+    }
+
+    // private function updateExpiryTime(User $user, $connection) {
+
+    // }
+
+    private function returnAccessTokenAttributes (User $user, $connection) {
+        $token_arr = $user->getAuth($connection);
+        $response_arr = array();
+        $response_arr['access_token'] = $token_arr[0];
+        $response_arr['expiry_time'] = $token_arr[1];
+        if ($token_arr !== '500') {
+            returnResponse('200', $response_arr);
+        } else {
+            returnResponse('500', 'Internal Server Error.');
+        }
+    }
+
+    private function validateLoginAttributes (User $user, $data) {
+        // Email
+        if ($this->validateEmail($data->email)) {
+            $user->email = $data->email;
+        } else {
+            $this->setLoginEmailError();
+        }
+        // Password
+        if ($this->validatePassword($data->password)) {
+            $user->password = $data->password;
+        } else {
+            $this->setLoginPasswordError('Password is required.');
+        }
+    }
+
     private function validateUserAttributes (User $user, $data) {
-        $user->username = $this->validateUsername($data->username);
-        if (!$user->username) {
+        // Username
+        if ($this->validateUsername($data->username)) {
+            $user->username = $data->username;
+        } else {
             $this->setUsernameError();
         }
-        $user->email = $this->validateEmail($data->email);
-        if (!$user->email) {
-            $this->setEmailError();
+        // Email
+        if ($this->validateEmail($data->email)) {
+            $user->email = $data->email;
+        } else {
+            $this->setRegisterEmailError();
         }
-        $user->no_hp = $this->validatePhone($data->no_hp);
-        if (!$user->no_hp) {
+        // Phone Number
+        if ($this->validatePhone($data->no_hp)) {
+            $user->no_hp = $data->no_hp;
+        } else {
             $this->setPhoneError();
         }
-        $user->picture_profile = $this->validatePicture($data->picture_profile);
-        if (!$user->picture_profile) {
+        // Picture Profile
+        if ($this->validatePicture($data->picture_profile)) {
+            $user->picture_profile = $data->picture_profile;
+        } else {
             $this->setPictureError();
         }
-        $user->password = $this->validatePassword($data->password);
-        if (!$user->password) {
-            $this->setPasswordError();
+        // Password
+        if ($this->validatePassword($data->password)) {
+            $user->password = password_hash($data->password, PASSWORD_DEFAULT);
+        } else {
+            $this->setRegisterPasswordError();
         }
     }
 
     private function validateUsername ($username) {
         $validated = false;
         if (preg_match('/^[a-zA-Z0-9_]+$/', $username)) { 
-            $validated = $username;
+            $validated = true;
         }
         return $validated;
     }
@@ -68,7 +130,7 @@ class user_Controller {
     private function validateEmail ($email) {
         $validated = false;
         if (preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $email)) {
-            $validated = $email;
+            $validated = true;
         }
         return $validated;
     }
@@ -76,7 +138,7 @@ class user_Controller {
     private function validatePhone ($no_hp) {
         $validated = false;
         if (preg_match("/^(\d{9}|\d{12})$/", $no_hp)) {
-            $validated = $no_hp;
+            $validated = true;
         }
         return $validated;
     }
@@ -84,7 +146,7 @@ class user_Controller {
     private function validatePicture ($picture_profile) {
         $validated = false;
         if ($picture_profile) {
-            $validated = $picture_profile;
+            $validated = true;
         }
         return $validated;
     }
@@ -92,7 +154,7 @@ class user_Controller {
     private function validatePassword ($password) {
         $validated = false;
         if ($password) {
-            $validated = password_hash($password, PASSWORD_DEFAULT);
+            $validated = true;
         }
         return $validated;
     }
@@ -115,13 +177,28 @@ class user_Controller {
         return date('Y-m-d H:i:s');
     }
 
-    private function setUsernameError () {
-        $this->register_error_array['username'] = 'Username can only contain letters, numbers, and underscores.';
+    private function setRegisterEmailError () {
+        $this->register_error_array['email'] = 'Invalid Email Format.';
         $this->is_register_validated = false;
     }
 
-    private function setEmailError () {
-        $this->register_error_array['email'] = 'Invalid Email Format.';
+    private function setRegisterPasswordError () {
+        $this->register_error_array['password'] = 'Password is required.';
+        $this->is_register_validated = false;
+    }
+
+    private function setLoginEmailError () {
+        $this->login_error_array['email'] = 'Invalid Email Format.';
+        $this->is_login_validated = false;
+    }
+
+    private function setLoginPasswordError ($msg) {
+        $this->login_error_array['password'] = $msg;
+        $this->is_login_validated = false;
+    }
+
+    private function setUsernameError () {
+        $this->register_error_array['username'] = 'Username can only contain letters, numbers, and underscores.';
         $this->is_register_validated = false;
     }
 
@@ -132,11 +209,6 @@ class user_Controller {
 
     private function setPictureError () {
         $this->register_error_array['picture_profile'] = 'Picture profile is required.';
-        $this->is_register_validated = false;
-    }
-
-    private function setPasswordError () {
-        $this->register_error_array['password'] = 'Password is required.';
         $this->is_register_validated = false;
     }
 
