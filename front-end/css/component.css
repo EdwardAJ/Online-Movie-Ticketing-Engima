@@ -23,7 +23,6 @@
 
 .footer-form {
     font-size: 0.85rem;
-    
 }
 
 .input{
@@ -125,7 +124,6 @@ a:-webkit-any-link{
 
 .main-section {
     width: 80vw;
-    /* margin-left: 30px; */
     padding-left: 6.5vw;
     display: block;
 }
@@ -139,8 +137,7 @@ a:-webkit-any-link{
 }
 
 .section-movies {
-    min-height: 100vh;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
 }
@@ -169,6 +166,18 @@ a:-webkit-any-link{
     height: 100%;
     display: block;
     margin-right: 1.75rem;
+    padding-top: 0.75rem;
+}
+
+.home-page-movie .review {
+    margin-top: -0.5rem;
+    display: flex;
+}
+
+.review p {
+    margin-left: 0.5rem;
+    margin-top: 0.125rem;
+    color: rgb(181,181,181);
 }
 
 .home-page-movie p {
@@ -182,6 +191,7 @@ a:-webkit-any-link{
     border-radius: 10px;
 }
 
-::-webkit-scrollbar { 
-    /* display: none;  */
+.star-icon {
+    height: 1.25rem;
+    width: 1.25rem;
 }

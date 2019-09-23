@@ -52,7 +52,7 @@ class user_Controller {
         $this->validateLoginAttributes($user, $data);
         if ($this->is_login_validated) {
             $status = $user->login($connection);
-            if ($status === '200') {
+            if ($status == '200') {
                 if ($this->updateExpiryTime($user, $connection)) {
                     $this->returnAccessToken($user, $connection);
                 }
