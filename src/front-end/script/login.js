@@ -1,10 +1,13 @@
-const BASE_URL = 'http://localhost:3000';
+import { FRONT_END_BASE_URL, BACK_END_BASE_URL } from '../utils/const.js';
+import { sendAJAXRequest } from '../utils/ajax.js';
+import { createCookie } from '../utils/cookie.js';
 
 // Error IDs array to be reset and shown in HTML.
-allErrorIDs = [
+var allErrorIDs = [
     'wrong-email',
     'wrong-password'
 ]
+
 document.getElementById('loginButton').addEventListener('click', function () {
     startInformationSendSequence();
 })
@@ -31,18 +34,10 @@ function fetchInformation () {
 // This function utilizes AJAX to send to backend server.
 function sendInformationToBackEnd (email, password) {
     var payload = makeLoginJSON(email, password);
-    var xhr = new XMLHttpRequest();
-    // Call a function when the state changes.
-    xhr.onreadystatechange = function() {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var response = JSON.parse(this.responseText);
-            // Backend returns JSON, handled by following function:
-            handleLoginResponse(response);
-        }
-    }
-    xhr.open("POST", 'http://localhost:8080/user/login');
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(payload));
+    var url = BACK_END_BASE_URL + 'user/login';
+    sendAJAXRequest(payload, "POST", url, function(response) {
+        handleLoginResponse(response);
+    });
 }
 
 function makeLoginJSON (email, password) {
@@ -83,15 +78,5 @@ function handleSuccessResponse (response) {
     document.getElementById('email').style.borderColor = "green";
     document.getElementById('password').style.borderColor = "green";
     createCookie('Authorization', response.message.access_token, 1);
-    console.log(window.location.href);
-    window.location.href = BASE_URL + '/pages/home.html';
-}
-
-function createCookie (name, value, days) {
-    console.log('create cookie.');
-    var expdate = new Date();
-    expdate.setDate(expdate.getDate() + days);
-    var c_value = value + ((days == null) ? "" : "; expires=" + expdate.toUTCString()) + "; path=/";
-    document.cookie = name + "=" + c_value;
-    console.log('cookie: ', document.cookie);
+    window.location.href = FRONT_END_BASE_URL + 'pages/home.html';
 }
