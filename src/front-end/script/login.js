@@ -1,3 +1,5 @@
+const BASE_URL = 'http://localhost:3000';
+
 // Error IDs array to be reset and shown in HTML.
 allErrorIDs = [
     'wrong-email',
@@ -81,6 +83,7 @@ function handleSuccessResponse (response) {
     document.getElementById('email').style.borderColor = "green";
     document.getElementById('password').style.borderColor = "green";
     createCookie('Authorization', response.message.access_token, 1);
+    window.location.href = BASE_URL + '/pages/home.html';
 }
 
 function createCookie (name, value, days) {
