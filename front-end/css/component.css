@@ -98,3 +98,90 @@ a:-webkit-any-link{
     color:rgb(173,173,173);
     font-family: 'Raleway';
 }
+
+/* home.html */
+.home-page-wrapper {
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    min-height: 100vh;
+}
+
+.side-section-left {
+    background-color: rgb(99,99,99);
+    width: 10vw;
+    margin-left: -15px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+
+.side-section-right {
+    background-color: rgb(99,99,99);
+    width: 10vw;
+    margin-right: -15px;
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+
+
+.main-section {
+    width: 80vw;
+    /* margin-left: 30px; */
+    padding-left: 6.5vw;
+    display: block;
+}
+
+.section-welcome #username {
+    color: rgb(0, 192, 236);
+}
+
+.tagline {
+    margin-top: 2.25rem;
+}
+
+.section-movies {
+    min-height: 100vh;
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.section-welcome {
+    height: 100px;
+}
+
+.section-welcome h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: -0.25rem;
+}
+
+.section-welcome h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.line-break {
+    width: 100%;
+  }
+
+.home-page-movie {
+    max-width: 140px;
+    height: 100%;
+    display: block;
+    margin-right: 1.75rem;
+}
+
+.home-page-movie p {
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.home-page-movie .movie-design {
+    height: 219.24px;
+    width: 149.15px;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar { 
+    /* display: none;  */
+}
