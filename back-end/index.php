@@ -1,8 +1,8 @@
 
 <?php
 
-require 'src/back-end/config/database_connection.php';
-require 'src/back-end/routes/router.php';
+require 'config/database_connection.php';
+require 'routes/router.php';
 
 /*
  *  CORS setup
@@ -47,7 +47,8 @@ $connection = $database->connect();
 /*
  * Route every single request: call router.php
  */
-$router = new Router();
-$router->route($controller, $action, $database->connection);
-
+if ($controller != 'back-end') {
+    $router = new Router();
+    $router->route($controller, $action, $database->connection);
+}
 ?>

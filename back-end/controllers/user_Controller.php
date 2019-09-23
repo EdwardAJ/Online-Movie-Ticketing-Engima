@@ -1,6 +1,6 @@
 <?php
-include_once 'src/back-end/utils/response.php';
-require_once 'src/back-end/models/user.php';
+include_once 'utils/response.php';
+require_once 'models/user.php';
 
 class user_Controller {
     private $is_register_validated = true;
@@ -208,7 +208,7 @@ class user_Controller {
     }
     // https://stackoverflow.com/questions/15153776/convert-base64-string-to-an-image-file
     private function generatePicture ($picture_data, $filename) {
-        $full_path = 'src/back-end/pictures/users/' . $filename;
+        $full_path = 'pictures/users/' . $filename;
         $file = fopen($full_path, "wb");
         $data = explode(',', $picture_data);
         // Remove file headers.

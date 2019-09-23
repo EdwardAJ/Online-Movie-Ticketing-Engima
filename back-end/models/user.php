@@ -35,10 +35,12 @@
                 $result = password_verify($this->password, $hashed_password);
                 if ($result) {
                     return '200';
+                } else {
+                    return 'Wrong Password.' ;
                 }
             }
             if (!$result) {
-                return 'Wrong Password.' ;
+                return 'Please register yourself!' ;
             }
         }
 

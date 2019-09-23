@@ -14,9 +14,7 @@ function handleAuthResponse (response) {
     // 200 means successful status code!
     if (response.status_code === '200') {
         var curr_dir = window.location.href;
-        console.log('curr_dir: ', curr_dir);
         if (curr_dir === FRONT_END_BASE_URL) {
-            console.log('asaa');
             window.location.href = FRONT_END_BASE_URL + 'pages/home.html';
         }
     } else {
