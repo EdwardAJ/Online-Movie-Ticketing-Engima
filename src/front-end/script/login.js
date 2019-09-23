@@ -53,7 +53,7 @@ function makeLoginJSON (email, password) {
 function handleLoginResponse (response) {
     // 200 means successful status code!
     if (response.status_code == '200') {
-        handleSuccessResponse();
+        handleSuccessResponse(response);
     } else {
         handleBadResponse(response);
     }
@@ -71,14 +71,23 @@ function handleBadResponse (response) {
 
 // Change error text in HTML, assign it with messages from the backend.
 function changeWrongContents (errorIDs) {
-    console.log('errors: ', errorIDs);
     Object.keys(errorIDs).forEach(wrongID => {
         document.getElementById(wrongID).innerHTML = errorIDs[wrongID];
     })
 }
 
 // User has been created in MYSQL.
-function handleSuccessResponse () {
+function handleSuccessResponse (response) {
     document.getElementById('email').style.borderColor = "green";
     document.getElementById('password').style.borderColor = "green";
+    createCookie('Authorization', response.message.access_token, 1);
+}
+
+function createCookie (name, value, days) {
+    console.log('create cookie.');
+    var expdate = new Date();
+    expdate.setDate(expdate.getDate() + days);
+    var c_value = value + ((days == null) ? "" : "; expires=" + expdate.toUTCString()) + "; path=/";
+    document.cookie = name + "=" + c_value;
+    console.log('cookie: ', document.cookie);
 }
