@@ -83,6 +83,7 @@ function handleSuccessResponse (response) {
     document.getElementById('email').style.borderColor = "green";
     document.getElementById('password').style.borderColor = "green";
     createCookie('Authorization', response.message.access_token, 1);
+    console.log(window.location.href);
     window.location.href = BASE_URL + '/pages/home.html';
 }
 

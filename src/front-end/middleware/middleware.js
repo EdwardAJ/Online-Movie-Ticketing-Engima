@@ -1,6 +1,6 @@
-const BASE_URL = 'http://localhost:3000';
+const FRONT_END_BASE_URL = 'http://localhost:3000';
+const BACK_END_BASE_URL = 'http://localhost:8080';
 
-var authValidate = false;
 // Check cookie.
 function getCookie(c_name) {
     var i, x, y, ARRcookies = document.cookie.split(";");
@@ -20,13 +20,14 @@ function validateAuth (access_token) {
     // Call a function when the state changes.
     xhr.onreadystatechange = function() {
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+            console.log(this.responseText);
             var response = JSON.parse(this.responseText);
             // Backend returns JSON, handled by following function:
             handleAuthResponse(response);
         }
     }
-    var url = BASE_URL + '/user/auth';
-    xhr.open("GET", url, false);
+    var url = BACK_END_BASE_URL + '/user/auth';
+    xhr.open("GET", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.setRequestHeader("Authorization", access_token);
     xhr.send(null);
@@ -37,11 +38,11 @@ function handleAuthResponse (response) {
     if (response.status_code === '200') {
         authValidate = true;
         curr_dir = window.location.href;
-        if (curr_dir === BASE_URL) {
-            window.location.href = BASE_URL + '/pages/home.html';
+        if (curr_dir === FRONT_END_BASE_URL) {
+            window.location.href = FRONT_END_BASE_URL + '/pages/home.html';
         }
     } else {
-        window.location.href = BASE_URL + '/pages/login.html';
+        window.location.href = FRONT_END_BASE_URL + '/pages/login.html';
     }
 }
 
@@ -50,9 +51,8 @@ var access_token = getCookie('Authorization');
 if (access_token) {
     console.log('asfafa');
     validateAuth(access_token);
-}
-if (!authValidate) {
-    window.location.href = BASE_URL+ '/pages/login.html';
+} else {
+    window.location.href = FRONT_END_BASE_URL+ '/pages/login.html';
 }
 
 
