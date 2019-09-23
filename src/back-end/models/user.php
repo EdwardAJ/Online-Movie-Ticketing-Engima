@@ -52,12 +52,23 @@
             }
         }
 
-        public function getAuth ($database) {
-            $query = "SELECT token, token_expdate FROM " . $this->table . " WHERE email = '" . $this->email . "';";
+        public function getAccessToken ($database) {
+            $query = "SELECT token  FROM " . $this->table . " WHERE email = '" . $this->email . "';";
             $execute = mysqli_query($database, $query);
             $result = mysqli_fetch_array($execute);
             if ($result) {
                 return $result;
+            } else {
+                return '500';
+            }
+        }
+
+        public function validateAccessToken ($database, $access_token) {
+            $query = "SELECT token_expdate  FROM " . $this->table . " WHERE token = '" . $access_token . "';";
+            $execute = mysqli_query($database, $query);
+            $token_expdate_arr = mysqli_fetch_array($execute);
+            if ($token_expdate_arr) {
+                return $token_expdate_arr;
             } else {
                 return '500';
             }

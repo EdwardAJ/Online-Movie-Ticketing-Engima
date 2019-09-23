@@ -10,6 +10,14 @@ class user_Controller {
     private $login_error_array = array(
     );
 
+    private function getHeaderAuth () {
+        foreach (getallheaders() as $name => $value) { 
+            if ($name === 'Authorization') {
+                return $value;
+            }
+        }
+    }
+    
     public function register ($connection) {
         $user = new User($connection);
         $data = json_decode(file_get_contents("php://input"));
@@ -23,7 +31,7 @@ class user_Controller {
                 // Generate access token.
                 $user->token = $this->generateAccessToken();
                 // Generate current date.
-                $user->token_expdate = $this->generateExpDate();
+                $user->token_expdate = $this->generateCurrentDate();
                 $status = $user->register($connection);
                 if ($status == '200') {
                     returnResponse($status, 'User has been successfully created.');
@@ -38,6 +46,7 @@ class user_Controller {
     }
 
     public function login ($connection) {
+        $this->getHeaderAuth();
         $user = new User($connection);
         $data = json_decode(file_get_contents("php://input"));
         $this->validateLoginAttributes($user, $data);
@@ -45,7 +54,7 @@ class user_Controller {
             $status = $user->login($connection);
             if ($status === '200') {
                 if ($this->updateExpiryTime($user, $connection)) {
-                    $this->returnAccessTokenAttributes($user, $connection);
+                    $this->returnAccessToken($user, $connection);
                 }
             } else {
                 $this->setLoginPasswordError($status);
@@ -70,16 +79,44 @@ class user_Controller {
         }
     }
 
-    private function returnAccessTokenAttributes (User $user, $connection) {
-        $token_arr = $user->getAuth($connection);
+    // This function returns access token to front end, yet to be stored in cookies.
+    private function returnAccessToken (User $user, $connection) {
+        $token_arr = $user->getAccessToken($connection);
         $response_arr = array();
         $response_arr['access_token'] = $token_arr[0];
-        $response_arr['expiry_time'] = $token_arr[1];
-        if ($token_arr !== '500') {
+        if ($token_arr != '500') {
             returnResponse('200', $response_arr);
         } else {
             returnResponse('500', 'Internal Server Error.');
         }
+    }
+
+    // This function ensures the provided access token is valid and has not expired yet.
+    public function auth ($connection) {
+        $access_token = $this->getHeaderAuth();
+        $user = new User($connection);
+        $this->validateAccessToken($user, $connection, $access_token);
+    }
+
+    private function validateAccessToken (User $user, $connection, $access_token) {
+        $token_expdate_arr = $user->validateAccessToken($connection, $access_token);
+        $token_expdate = $token_expdate_arr[0];
+        if ($token_expdate_arr !== '500') {
+            if ($this->validateExpDate($token_expdate)) {
+                returnResponse('200', 'Access Token Valid.');
+            }
+        } else {
+            returnResponse('500', 'Invalid Access Token.');
+        }
+    }
+
+    private function validateExpDate ($token_expdate) {
+        $validate = true;
+        if ($token_expdate < $this->generateCurrentDate()) {
+            $validate = false;
+            returnResponse('500', 'Expired Access Token.');
+        }
+        return $validate;
     }
 
     private function validateLoginAttributes (User $user, $data) {
@@ -184,7 +221,7 @@ class user_Controller {
         return uniqid();
     }
 
-    private function generateExpDate () {
+    private function generateCurrentDate () {
         return date('Y-m-d H:i:s');
     }
 
