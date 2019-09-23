@@ -3,6 +3,7 @@
     display: flex;
     height: 100vh;
     min-height: 500px;
+    background-color: white;
 }
 
 .center {
@@ -15,6 +16,7 @@ p {
     font-family: 'Raleway';
 }
 
-body{
+body {
 	margin: 0;
+	background-color: black;
 }
