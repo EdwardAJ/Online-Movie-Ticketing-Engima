@@ -283,7 +283,7 @@ hr {
     color:white;
 }
 
-.booking-message{
+#booking-message{
     width: 50%;
     float:right;
     padding-left: 2rem;
@@ -305,6 +305,9 @@ hr {
     color: rgb(180,180,180);
 }
 
+#booked{
+    display: none;
+}
 .screen-img{
     
     width: 93%; 
