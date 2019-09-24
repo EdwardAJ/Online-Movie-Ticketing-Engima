@@ -87,6 +87,9 @@ a:-webkit-any-link{
 	padding-left:16px;
 	font-family: 'Raleway';
 	color: black;
+	position: fixed;
+	top:0;	
+	width: 100%;
 }
 
 .logo{
@@ -122,7 +125,14 @@ a:-webkit-any-link{
 	color: rgb(0,192,236);
 }
 
+.topnav .search-container{
+	float: left;
+	padding-top: 10px;
+	margin-right: 0px;
+}
+
 .main-review{
+	margin-top: 2em;
 	width: 75%;
 	height: 100%;
 	padding: 30px;
