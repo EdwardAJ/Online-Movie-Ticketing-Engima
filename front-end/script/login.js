@@ -49,7 +49,7 @@ function makeLoginJSON (email, password) {
 
 function handleLoginResponse (response) {
     // 200 means successful status code!
-    if (response.status_code == '200') {
+    if (response.status_code === '200') {
         handleSuccessResponse(response);
     } else {
         handleBadResponse(response);

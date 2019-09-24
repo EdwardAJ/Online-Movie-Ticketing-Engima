@@ -18,17 +18,25 @@ function handleAuthResponse (response) {
             window.location.href = FRONT_END_BASE_URL + 'pages/home.html';
         }
     } else {
+        console.log('assaas: ');
         window.location.href = FRONT_END_BASE_URL + 'pages/login.html';
     }
 }
 
 // Middleware program starts here:
-var access_token = getCookie('Authorization');
-if (access_token) {
-    validateAuth(access_token);
-} else {
-    window.location.href = FRONT_END_BASE_URL+ 'pages/login.html';
+function execMiddleware () {
+    var access_token = getCookie('Authorization');
+    if (access_token) {
+        validateAuth(access_token);
+    } else {
+        window.location.href = FRONT_END_BASE_URL+ 'pages/login.html';
+    }
 }
+
+window.onload = function () {
+    execMiddleware();
+}
+
 
 
 
