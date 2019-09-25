@@ -4,23 +4,22 @@
         <link rel="stylesheet" href="../css/layout.css">
         <link rel="stylesheet" href="../css/responsive.css">
         <link rel="stylesheet" href="../css/component.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:600,700,800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <!-- NAVBAR -->
         <nav class="navbar">
-            <div class="container-navbar">
-                <span class="navbar-brand">
+                <div class="navbar-brand">
                     <a href="#"><span class="bold">Engi</span>ma</a>
-                </span>
-                    <input class="input search" type ="search" placeholder="Search movie">
-                    <span class="fa fa-search fa-xs"></span>
-                <ul class="menu-list">
-                    <li class="menu"><a href="#">Transactions</a></li>
-                    <li class="menu"><a href="#">Logout</a></li>
-                </ul>  
-            </div>
-            
+                </div>
+                <div class="search-section">
+                     <input class="input search" type ="text" placeholder="Search movie">
+                </div>
+                <div class="menu-list">
+                    <div id="transactions" class="menu"><a href="#">Transactions</a></div>
+                    <div id="logout" class="menu"><a href="#">Logout</a> </div>
+                </div>  
         </nav>
 
         <!-- BODY -->
