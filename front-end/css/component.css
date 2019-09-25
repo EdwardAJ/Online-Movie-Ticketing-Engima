@@ -187,6 +187,10 @@ a:-webkit-any-link{
     font-size: 0.85rem;
 }
 
+.movie-title {
+    color: black;
+}
+
 .home-page-movie .movie-design {
     height: 219.24px;
     width: 149.15px;
