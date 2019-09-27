@@ -115,9 +115,11 @@ class UserController
         if ($token_expdate_arr !== '500') {
             if ($this->validateExpDate($token_expdate)) {
                 returnResponse('200', 'Access Token Valid.');
+                return true;
             }
         } else {
             returnResponse('500', 'Invalid Access Token.');
+            return false;
         }
     }
 

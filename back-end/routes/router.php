@@ -1,7 +1,7 @@
 <?php namespace Routes;
 
 require_once 'controllers/userController.php';
-use Error\EngimaError;
+require_once 'controllers/homeController.php';
 
 class Router
 {
