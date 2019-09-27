@@ -7,26 +7,35 @@
         public $email;
         public $no_hp;
         public $picture_profile;
+        public $picture_profile_path;
+        public $token;
+        public $token_expdate;
         public $password;
         public function __construct ($database) {
             $this->connection = $database;
         }
-        // Create User
-        public function create($database) {
+        // Register User
+        public function register($database) {
             $query = "INSERT INTO " . $this->table
-                     . " VALUES " . "('" . $this->username. "', '" . $this->email . "', '" . $this->no_hp . "', '" . $this->picture_profile . "', '" . $this->password . "')";
-            echo 'query: ' . $query; 
+                     . " VALUES " . "('" . $this->username. "', '" . $this->email . "', '" . $this->no_hp . "', '" . $this->picture_profile_path . "', '" . $this->password . "', '" . $this->token . "', '" . $this->token_expdate . "')";
             if (mysqli_query($database, $query)) {
                 return '200';
             } else {
                 return 'Error ' . mysqli_error($database);
             }
         }
-        // Read User
-        public function read() {}
-        // Update User
-        public function update() {}
-        // Delete User
-        public function delete() {}
+
+        // Register validation for duplicates.
+        public function validateDuplicate ($database , $value, $attribute) {
+            $query = "SELECT " . $attribute . " FROM " . $this->table . " WHERE  "
+                     . $attribute . " =  " . "'" . $value . "'";
+            $execute = mysqli_query($database, $query);
+            $result = mysqli_fetch_array($execute);
+            if ($result) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 ?>

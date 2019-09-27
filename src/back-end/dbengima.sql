@@ -35,6 +35,7 @@ CREATE TABLE `genre` (
 
 LOCK TABLES `genre` WRITE;
 /*!40000 ALTER TABLE `genre` DISABLE KEYS */;
+INSERT INTO `genre` VALUES ('GEN01','Comedy'),('GEN02','Horror'),('GEN03','Romance'),('GEN04','Sci-Fi'),('GEN06','Drama'),('GEN07','Action'),('GEN08','Documentary'),('GEN09','Thriller'),('GEN10','Rom-Com'),('GEN11','Fantasy'),('GEN12','Biography'),('GEN13','Famuly'),('GEN14','Musical'),('GEN15','Adventure');
 /*!40000 ALTER TABLE `genre` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -49,7 +50,7 @@ CREATE TABLE `movie` (
   `id_movie` char(7) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `runtime` int(10) unsigned NOT NULL,
-  `tanggal_rilis` datetime NOT NULL,
+  `tanggal_rilis` date NOT NULL,
   `sinopsis` longtext NOT NULL,
   `poster` longblob NOT NULL,
   PRIMARY KEY (`id_movie`)
@@ -62,6 +63,7 @@ CREATE TABLE `movie` (
 
 LOCK TABLES `movie` WRITE;
 /*!40000 ALTER TABLE `movie` DISABLE KEYS */;
+INSERT INTO `movie` VALUES ('MOV0001','Anna',118,'2019-06-22','Di balik keanggunan Anna Poliatova (Sasha Luss) terdapat sebuah rahasia. Model cantik ini adalah senjata yang sangat mematikan.Kemampuannya membunuh di lapangan menjadikan Anna salah satu agen rahasia yang paling ditakuti.',_binary 'home/muhnrdnhsn/Desktop/IF310/tugas-besar-1-2019/src/back-end/database/movpos_Anna.jpg'),('MOV0002','Bumi Manusia',181,'2019-08-15','Ini adalah kisah dua anak manusia yang meramu cinta di atas pentas pergelutan tanah kolonial awal abad 20.Inilah kisah Minke dan Annelies. Cinta yang hadir di hati Minke untuk Annelies, membuatnya mengalami pergulatan batin tak berkesudahan. Dia, pemuda pribumi, Jawa totok. Sementara Annelies, gadis Indo Belanda anak seorang Nyai.Bapak Minke yang baru saja diangkat jadi Bupati, tak pernah setuju Minke dekat dengan keluarga Nyai, sebab posisi Nyai di masa itu dianggap sama rendah dengan binatang peliharaan.Namun Nyai yang satu ini, Nyai Ontosoroh, ibunda Annelies, berbeda. Minke mengagumi segala pemikiran dan perjuangannya melawan keangkuhan hegemoni bangsa kolonial.Bagi Minke, Nyai Ontosoroh adalah cerminan modernisasi yang kala itu sedang memulai geliatnya. Ketika keangkuhan hukum kolonial mencoba merenggut paksa Annelies dari sisi Minke, Nyai Ontosoroh pula yang meletupkan semangat agar Minke terus maju dan memekikkan satu kata, \"Lawan!\" ',_binary 'home/muhnrdnhsn/Desktop/IF310/tugas-besar-1-2019/src/back-end/database/movpos_BumiManusia.jpg'),('MOV0003','47 METERS DOWN: UNCAGED',90,'2019-08-23','Liburan empat gadis untuk menyelam ke sebuah kota bawah air yang hancur berubah menjadi tragedi.Nyawa mereka terancam saat hiu ganas berada disekitar mereka. Kini keempatnya berusaha menyelamatkan diri dari ganasnya gigi tajam hiu besar.',_binary 'home/muhnrdnhsn/Desktop/IF310/tugas-besar-1-2019/src/back-end/database/movpos_47MetersDown.jpg'),('MOV0004','ANGEL HAS FALLEN',121,'2019-08-21','Liburan empat gadis untuk menyelam ke sebuah kota bawah air yang hancur berubah menjadi tragedi.Nyawa mereka terancam saat hiu ganas berada disekitar mereka. Kini keempatnya berusaha menyelamatkan diri dari ganasnya gigi tajam hiu besar.Pasca percobaan pembunuhan Presiden AS. Agen rahasia Mike Banning (Gerard Butler) kini menjadi tersangka utama. Tidak terima, Mike kabur dan berusaha mengungkap pihak yang telah menjebaknya.',_binary 'home/muhnrdnhsn/Desktop/IF310/tugas-besar-1-2019/src/back-end/database/movpos_AngleHasFallen.jpg'),('MOV0005','ONCE UPON A TIME IN HOLLYWOOD',160,'2019-08-24','Mengambil latar Los Angeles tahun 1969, Once Upon a Time in Hollywood akan berkisah tentang Rick Dalton (Leonardo DiCaprio), seorang bintang televisi yang pernah berjaya di masanya. Dengan berkembangnya industri layar lebar hollywood, Rick dan pemeran penggantinya Cliff Booth (Brad Pitt) memutuskan bekerja sama untuk mengejar karir di industri film.',_binary 'home/muhnrdnhsn/Desktop/IF310/tugas-besar-1-2019/src/back-end/database/movpos_OnceUponATimeInHollywood.jpg');
 /*!40000 ALTER TABLE `movie` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,6 +90,7 @@ CREATE TABLE `moviegenre` (
 
 LOCK TABLES `moviegenre` WRITE;
 /*!40000 ALTER TABLE `moviegenre` DISABLE KEYS */;
+INSERT INTO `moviegenre` VALUES ('MOV0005','GEN01'),('MOV0003','GEN02'),('MOV0002','GEN06'),('MOV0003','GEN06'),('MOV0005','GEN06'),('MOV0001','GEN07'),('MOV0004','GEN07'),('MOV0001','GEN09'),('MOV0003','GEN15');
 /*!40000 ALTER TABLE `moviegenre` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -267,4 +270,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-18 17:57:31
+-- Dump completed on 2019-09-22 20:06:17

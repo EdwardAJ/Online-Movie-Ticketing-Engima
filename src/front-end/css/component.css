@@ -33,7 +33,6 @@
     padding: 0.7rem 1rem; 
     border: 1px solid #ccc; 
     border-radius: 0.3rem;
-    
 }
 
 .lab {
@@ -50,7 +49,7 @@ a:-webkit-any-link{
     font-style: black;
 }
 
-.button{
+.button-auth {
     width: 100%; 
     padding: 0.9rem 0.9rem;
     margin-top: 0.5rem;
@@ -64,7 +63,7 @@ a:-webkit-any-link{
     cursor: pointer;
 }
 
-.browse {
+.button-browse {
     width: 49%; 
     padding: 0.6rem 0.6rem;
     margin-top: 0.2rem;
@@ -75,9 +74,14 @@ a:-webkit-any-link{
     color:white;
 }
 
-.js {
+.input-js {
     width: 49%;
 }
+
+.file-uploader {
+    display: none;
+}
+
 .wrong-message{
     color: rgb(228,1,2);
     margin-bottom: 0.1rem;
