@@ -25,7 +25,8 @@ class Transaction
         }
     }
 
-    public function getNewTransactionID($database){
+    public function getNewTransactionID($database)
+    {
         $query = "SELECT count id_transaction FROM " . $this->table . "';";
         $execute = mysqli_query($database, $query);
         $result = mysqli_fetch_array($execute);
