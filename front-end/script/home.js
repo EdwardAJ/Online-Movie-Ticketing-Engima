@@ -8,7 +8,7 @@ getAllMovies(access_token);
 
 function getAllMovies (access_token) {
     var url = BACK_END_BASE_URL + 'home/fetch';
-    sendAJAXRequest(null, "GET", url, function (response) { 
+    sendAJAXRequest(null, "GET", url, function (response) {
         handleResponse(response);
     }, access_token);
 }
