@@ -31,7 +31,8 @@ class Movie
     public function getAllMoviesWithKeyword($database, $params)
     {
         $rows_skipped = ($params['page'] - 1) * 5;
-        $query = "SELECT id_movie, nama, sinopsis, poster FROM " . $this->table ." WHERE 'nama' LIKE '%". $params['keyword'] . "%' LIMIT 5 OFFSET ". $rows_skipped . ";";
+        echo $query;
+        $query = "SELECT id_movie, nama, sinopsis, poster FROM " . $this->table ." WHERE nama LIKE '%". $params['keyword'] . "%' LIMIT 5 OFFSET ". $rows_skipped . ";";
         // echo $query;
         $execute = mysqli_query($database, $query);
         $result = mysqli_fetch_all($execute, MYSQLI_ASSOC);
@@ -42,7 +43,7 @@ class Movie
 
     public function countAllMoviesWithKeyWord($database, $params)
     {
-        $query = "SELECT COUNT(id_movie) FROM " . $this->table ." WHERE 'nama' LIKE '%". $params['keyword'] . "%';";
+        $query = "SELECT COUNT(id_movie) FROM " . $this->table ." WHERE nama LIKE '%". $params['keyword'] . "%';";
         $execute = mysqli_query($database, $query);
         $result = mysqli_fetch_array($execute);
         if ($result) {

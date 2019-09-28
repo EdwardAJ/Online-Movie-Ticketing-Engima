@@ -661,7 +661,7 @@ hr {
     font-size: 0.85rem;
     font-weight: 600;
     color: rgb(0, 192, 236);
-    margin-left: 1%;
+    margin-left: 2%;
     margin-right: 1%;
 }
 
@@ -671,4 +671,9 @@ hr {
 
 #next, #back {
     cursor: pointer;
+}
+
+#buttons {
+    display: flex;
+    /* margin-right: 1%; */
 }
