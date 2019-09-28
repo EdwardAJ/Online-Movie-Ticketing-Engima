@@ -39,4 +39,16 @@ class Movie
             return $result;
         }
     }
+
+    public function countAllMoviesWithKeyWord($database, $params)
+    {
+        $query = "SELECT COUNT(id_movie) FROM " . $this->table ." WHERE 'nama' LIKE '%". $params['keyword'] . "%';";
+        $execute = mysqli_query($database, $query);
+        $result = mysqli_fetch_all($execute, MYSQLI_ASSOC);
+        if ($result) {
+            return $result;
+        } else {
+            return '500';
+        }
+    }
 }

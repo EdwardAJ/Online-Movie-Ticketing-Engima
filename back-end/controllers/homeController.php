@@ -90,7 +90,8 @@ class HomeController
         $movies_arr = $movie->getAllMoviesWithKeyword($connection, $params);
         // Count rows in movies_arr:
         if (count($movies_arr) != 0) {
-            $this->renderSearchFound($movies_arr, count($movies_arr), params['keyword']);
+            $count = $movie->countAllMoviesWithKeyWord($connection, $params)[0];
+            $this->renderSearchFound($movies_arr, $count, params['keyword']);
         } else {
             $this->renderSearchNotFound($movies_arr);
         }
@@ -104,7 +105,7 @@ class HomeController
                         <a href="#"><span class="bold">Engi</span>ma</a>
                     </div>
                     <div class="search-section">
-                        <input class="input search" type ="text" placeholder="Search movie">
+                        <input id="search-input" class="input search" type ="text" placeholder="Search movie">
                         <a href="search.html"> <img src="../assets/search-bar.png" class="search-bar icon-layout"> </a>
                     </div>
                     <div class="menu-list">
@@ -169,5 +170,9 @@ class HomeController
         }
         $html .= '</div>';
         returnSearch('200', $html, $count);
+    }
+
+    public function renderSearchNotFound() {
+        returnResponse('200', 'AAAAA');
     }
 }
