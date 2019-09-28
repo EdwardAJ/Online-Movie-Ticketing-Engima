@@ -162,7 +162,7 @@ class HomeController
                                 <p>'. $movie['sinopsis'] .'</p>
                             </div>';
             $html .=    '</div>';
-            $html .=    '<div id='. $movie['id_movie'] . 'class="view-detail fa-lg">
+            $html .=    '<div id="'. $movie['id_movie'] . '" class="view-detail fa-lg">
                             <p> View details </p>
                             <i class="fa fa-arrow-circle-right icon-detail"></i>
                          </div>';
