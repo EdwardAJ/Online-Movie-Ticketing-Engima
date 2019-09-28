@@ -108,7 +108,7 @@ a:-webkit-any-link{
 
 .side-section-left {
     background-color: rgb(99,99,99);
-    width: 12.5vw;
+    width: 10vw;
     margin-left: -15px;
     /* margin-top: -15px; */
     margin-bottom: -15px;
@@ -116,7 +116,7 @@ a:-webkit-any-link{
 
 .side-section-right {
     background-color: rgb(99,99,99);
-    width: 12.5vw;
+    width: 10vw;
     margin-right: -15px;
     /* margin-top: -15px; */
     margin-bottom: -15px;
@@ -124,7 +124,7 @@ a:-webkit-any-link{
 
 
 .main-section {
-    width: 75vw;
+    width: 80vw;
     padding-left: 6.5vw;
     display: block;
 }
@@ -561,4 +561,114 @@ hr {
     padding-right: 0.2rem;
     margin-left: 2rem;
 }
-  
+
+/* Search */
+.section-title {
+    height: 100px;
+}
+
+.section-title h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: -0.3rem;
+    margin-top: 75px;
+}
+
+.section-title .tagline {
+    margin-top: 1.25rem;
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: gray;
+}
+
+.section-search {
+    margin-top: 0.35rem;
+    display: block;
+    flex-wrap: wrap;
+}
+
+.search-card {
+    /*max-width: 140px;
+    height: 100%;*/
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    display: flex;
+    border-bottom: 1px solid gray;
+    max-width: 90%;
+/*    margin-right: 1.75rem;
+    padding-top: 0.75rem;*/
+}
+
+.image-section .movie-design {
+    height: 182.7px;
+    width: 124.2917px;
+    border-radius: 10px;
+}
+
+.desc-section {
+    display: block;
+    margin-left: 1.75rem;
+    max-width: 60%;
+}
+
+.desc-section h3 {
+    font-weight: 800;
+    
+}
+
+.desc-section .review {
+    margin-top: -0.57rem;
+    display: flex;
+}
+
+.review-score {
+    font-weight: 700;
+}
+
+.synopsis {
+    font-size: 0.8rem;
+    margin-top: -0.75rem;
+    line-height: 1.25rem;
+    /*max-width: 80%;*/
+}
+
+.view-detail {
+    margin-top: 20%;
+    margin-left: 5.25%;
+    display: flex;
+    cursor: pointer;
+}
+
+.view-detail p {
+    color: rgb(0, 192, 236);
+    font-weight: 700;
+    font-size: 15;
+}
+
+.icon-detail {
+    margin-top: 10.5%;
+    margin-left: 10px;
+    color: rgb(0, 192, 236);
+}
+
+.section-pagination {
+    justify-content: center;
+    display: flex;
+    margin-right: 10%;
+}
+
+.section-pagination p {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgb(0, 192, 236);
+    margin-left: 1%;
+    margin-right: 1%;
+}
+
+.section-pagination .seat {
+    margin-right: 1%;
+}
+
+#next, #back {
+    cursor: pointer;
+}
