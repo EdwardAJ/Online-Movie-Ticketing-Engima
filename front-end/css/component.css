@@ -414,6 +414,11 @@ hr {
     color:white;
 }
 
+.seat-colored {
+    background-color: rgb(2,190,238);
+    color:white;
+}
+
 .booking-message{
     width: 50%;
     float:right;
@@ -671,4 +676,8 @@ hr {
 
 #next, #back {
     cursor: pointer;
+}
+
+#buttons {
+    display: flex;
 }

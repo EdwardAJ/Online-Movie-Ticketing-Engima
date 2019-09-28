@@ -12,21 +12,17 @@ getAllMoviesByKeyword(access_token, 1, keyword);
 
 // On click event:
 window.onclick = e => {
-    console.log(e.target.id);
-    if (e.target.id >= 1 && e.target.id <= 5) {
+    if (e.target.id >= 1 && e.target.id <= max_page) {
         curr_page = e.target.id;
-        console.log('curr: ', curr_page);
         getAllMoviesByKeyword(access_token, curr_page, keyword);
     } else if (e.target.id === 'next') {
         if (curr_page < max_page) {
             curr_page++;
-            console.log('curr: ', curr_page);
             getAllMoviesByKeyword(access_token, curr_page, keyword);
         }
     } else if (e.target.id === 'back') {
         if (curr_page > 1) {
             curr_page--;
-            console.log('curr: ', curr_page);
             getAllMoviesByKeyword(access_token, curr_page, keyword);
         }
     } else if (isMovieDetail(e.target.id)) {
@@ -37,17 +33,16 @@ window.onclick = e => {
 function getAllMoviesByKeyword (access_token, page, keyword) {
     var url = BACK_END_BASE_URL + 'home/fetch?page=' + page  + '&keyword=' + keyword;
     sendAJAXRequest(null, "GET", url, function (response) {
-        handleResponse(response);
+        handleResponse(response, page);
     }, access_token);
 }
 
 // This function utilizes AJAX to send to backend server.
-function handleResponse (response) {
+function handleResponse (response, page) {
     if (response.status_code === '200') {
         // Change max_page global variable.
         max_page = Math.ceil(response.count / 5);
-        console.log('max_page: ', max_page);
-        showPaginationButtons(max_page);
+        showPaginationButtons(max_page, page);
         document.getElementById('page').innerHTML = response.message;
     } else {
         // Returns HTML
@@ -61,10 +56,14 @@ function getKeywordParams () {
     return keyword;
 }
 
-function showPaginationButtons (page_count) {
+function showPaginationButtons (page_count, page) {
     var html_element = '';
     for (let id = 1; id <= page_count; id++) {
-        html_element += '<button id=' + id + ' class="seat" type="submit"> ' + id + ' </button>';
+        if (id != page) {
+            html_element += '<button id=' + id + ' class="seat" type="submit"> ' + id + ' </button>';
+        } else {
+            html_element += '<button id=' + id + ' class="seat seat-colored" type="submit"> ' + id + ' </button>';
+        }
     }
     document.getElementById('buttons').innerHTML = html_element;
 }
