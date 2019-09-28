@@ -668,3 +668,7 @@ hr {
 .section-pagination .seat {
     margin-right: 1%;
 }
+
+#next, #back {
+    cursor: pointer;
+}
