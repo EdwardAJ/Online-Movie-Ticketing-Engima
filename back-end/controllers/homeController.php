@@ -90,8 +90,9 @@ class HomeController
         $movies_arr = $movie->getAllMoviesWithKeyword($connection, $params);
         // Count rows in movies_arr:
         if (count($movies_arr) != 0) {
-            $count = $movie->countAllMoviesWithKeyWord($connection, $params)[0];
-            $this->renderSearchFound($movies_arr, $count, params['keyword']);
+            $count_arr = $movie->countAllMoviesWithKeyWord($connection, $params);
+            $count = $count_arr[0];
+            $this->renderSearchFound($movies_arr, $count, $params['keyword']);
         } else {
             $this->renderSearchNotFound($movies_arr);
         }
@@ -143,8 +144,8 @@ class HomeController
     public function renderSearchFound($movies_arr, $count, $keyword)
     {
         $html .= '<div class="section-title">';
-        $html .=    '<h3> Showing search result for keywoard "<span id="keyword">'. $keyword . '</span>" </h3>';
-        $html .=    '<h4 class="tagline">'. $count . 'results available </h4>';
+        $html .=    '<h3> Showing search result for keyword "<span id="keyword">'. $keyword . '</span>" </h3>';
+        $html .=    '<h4 class="tagline">'. $count . ' results available </h4>';
         $html .= '</div>';
         $html .= '<div class="section-search">';
         foreach ($movies_arr as $movie) {
@@ -173,6 +174,11 @@ class HomeController
     }
 
     public function renderSearchNotFound() {
-        returnResponse('200', 'AAAAA');
+        $html .= '<div class="section-title">';
+        $html .=    '<h3> Showing search result for keyword "<span id="keyword">'. $keyword . '</span>" </h3>';
+        $html .=    '<h4 class="tagline"> 0 results available </h4>';
+        $html .= '</div>';
+        $html .= '<div class="section-search">';
+        returnResponse('200', $html);
     }
 }

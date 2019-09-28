@@ -1,5 +1,6 @@
 <script type="module" src="../middleware/middleware.js"></script>
 <script type="module" src="../script/search.js"></script>
+<script type="module" src="../script/load.js"></script>
 <head>
     <title> Engima </title>
     <link rel="stylesheet" href="../css/layout.css">
@@ -15,7 +16,7 @@
             </div>
             <div class="search-section">
                 <input id="search-input" class="input search" type ="text" placeholder="Search movie">
-                <a > <img src="../assets/search-bar.png" class="search-bar icon-layout"> </a>
+                <img src="../assets/search-bar.png" class="search-bar icon-layout">
             </div>
             <div class="menu-list">
                 <div id="transactions" class="menu"><a href="#">Transactions</a></div>
@@ -26,50 +27,8 @@
             <div class="side-section-left">
             </div>
             <div class="main-section">
-                <!-- <div class="section-title">
-                    <h3> Showing search result for keyboard "<span id="keyword"> Captain </span>" </h3>
-                    <h4 class="tagline"> 14 results available </h4>
+                <div id="page">
                 </div>
-                <div class="section-search">
-                    <div class="search-card">
-                        <div class="image-section">
-                            <img class="movie-design" src="http://localhost:8080/pictures/movies/movpos_47MetersDown.jpg">
-                        </div>
-                        <div class="desc-section">
-                            <h3> Avengers: Endgame</h3>
-                            <div class="review">
-                                <img class="star-icon" src="../assets/star-icon.png">
-                                <p class="review-score"> 8.5</p>
-                            </div>
-                            <div class="synopsis">
-                                <p> Curabitur malesuada eleifend orci non hendrerit. Pellentesque id pellentesque urna. Ut ex velit, pretium et metus a, aliquet placerat purus. Duis fermentum eu nisi sed tincidunt. Aliquam commodo rutrum arcu et pretium. Aliquam ultricies placerat felis. Vivamus egestas urna vitae risus vehicula, in hendrerit sapien rhoncus. </p>
-                            </div>
-                        </div>
-                        <div id="1" class="view-detail fa-lg">
-                            <p> View details </p>
-                            <i class="fa fa-arrow-circle-right icon-detail"></i>
-                        </div>
-                    </div>
-                    <div class="search-card">
-                        <div class="image-section">
-                            <img class="movie-design" src="http://localhost:8080/pictures/movies/movpos_47MetersDown.jpg">
-                        </div>
-                        <div class="desc-section">
-                            <h3> Avengers: Endgame</h3>
-                            <div class="review">
-                                <img class="star-icon" src="../assets/star-icon.png">
-                                <p class="review-score"> 8.5</p>
-                            </div>
-                            <div class="synopsis">
-                                <p> Curabitur malesuada eleifend orci non hendrerit. Pellentesque id pellentesque urna. Ut ex velit, pretium et metus a, aliquet placerat purus. Duis fermentum eu nisi sed tincidunt. Aliquam commodo rutrum arcu et pretium. Aliquam ultricies placerat felis. Vivamus egestas urna vitae risus vehicula, in hendrerit sapien rhoncus. </p>
-                            </div>
-                        </div>
-                        <div id="1" class="view-detail fa-lg">
-                            <p> View details </p>
-                            <i class="fa fa-arrow-circle-right icon-detail"></i>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="section-pagination">
                     <p id="back"> Back </p>
                     <button id=1 class="seat" type="submit"> 1 </button>

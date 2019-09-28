@@ -44,7 +44,7 @@ class Movie
     {
         $query = "SELECT COUNT(id_movie) FROM " . $this->table ." WHERE 'nama' LIKE '%". $params['keyword'] . "%';";
         $execute = mysqli_query($database, $query);
-        $result = mysqli_fetch_all($execute, MYSQLI_ASSOC);
+        $result = mysqli_fetch_array($execute);
         if ($result) {
             return $result;
         } else {
