@@ -62,7 +62,7 @@ class HomeController
             $user = new User($connection);
             if ($this->validateAccessToken($user, $connection, $access_token)) {
                 $this->fetchUsername($user, $connection, $access_token);
-                if ($params['keyword']) {
+                if ($params['page']) {
                     $this->getAllMoviesWithKeyword($connection, $params);
                 } else {
                     $this->getAllMovies($connection);
@@ -108,7 +108,7 @@ class HomeController
         foreach ($movies_arr as $movie) {
             $html .=    '<a href="detail.html?id='. $movie['id_movie'] . '">
                             <div class="home-page-movie">
-                                <img class="movie-design" src="http://localhost:8080/pictures/movies/movpos_47MetersDown.jpg">
+                                <img class="movie-design" src="http://localhost:8080/' . $movie['poster'] .'";">
                                 <p class="movie-title">'. $movie['nama'] . '</p>
                                 <div class="review">
                                     <img class="star-icon" src="../assets/star-icon.png">
@@ -131,7 +131,7 @@ class HomeController
         foreach ($movies_arr as $movie) {
             $html .= '<div class="search-card">';
             $html .=    '<div class="image-section">
-                            <img class="movie-design" src="http://localhost:8080/pictures/movies/movpos_47MetersDown.jpg">
+                            <img class="movie-design" src="http://localhost:8080/' . $movie['poster'] .'";">
                         </div>';
             $html .=    '<div class="desc-section">';
             $html .=        '<h3>'. $movie['nama'] .'</h3>';
