@@ -57,11 +57,15 @@ class HomeController
 
     public function fetch($connection)
     {
-        $access_token = $this->getHeaderAuth();
-        $user = new User($connection);
-        if ($this->validateAccessToken($user, $connection, $access_token)) {
-            $this->fetchUsername($user, $connection, $access_token);
-            $this->getAllMovies($connection);
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $access_token = $this->getHeaderAuth();
+            $user = new User($connection);
+            if ($this->validateAccessToken($user, $connection, $access_token)) {
+                $this->fetchUsername($user, $connection, $access_token);
+                $this->getAllMovies($connection);
+            }
+        } else {
+            returnResponse('500', 'Invalid HTTP REQUEST.');
         }
     }
 
