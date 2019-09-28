@@ -49,6 +49,18 @@ class User
         }
     }
 
+    public function fetchUsername($database, $access_token)
+    {
+        $query = "SELECT username  FROM " . $this->table . " WHERE token = '" . $access_token . "';";
+        $execute = mysqli_query($database, $query);
+        $username_arr = mysqli_fetch_array($execute);
+        if ($username_arr) {
+            return $username_arr[0];
+        } else {
+            return '500';
+        }
+    }
+
     public function updateExpiryTime($database)
     {
         $query = "UPDATE " . $this->table . " SET token_expdate = '" . $this->token_expdate . "' WHERE email = '" . $this->email . "';";

@@ -19,7 +19,7 @@ class Movie
     // Get All Movies
     public function getAllMovies($database)
     {
-        $query = "SELECT nama FROM " . $this->table .";";
+        $query = "SELECT id_movie, nama, poster FROM " . $this->table .";";
         $execute = mysqli_query($database, $query);
         $result = mysqli_fetch_all($execute, MYSQLI_ASSOC);
         if ($result) {

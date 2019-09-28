@@ -10,6 +10,7 @@ use Models\User;
 
 class HomeController
 {
+    private $username;
     private function getHeaderAuth()
     {
         foreach (getallheaders() as $name => $value) {
@@ -49,11 +50,17 @@ class HomeController
         return date('Y-m-d H:i:s');
     }
 
+    private function fetchUsername(User $user, $connection, $access_token)
+    {
+        $this->username = $user->fetchUsername($connection, $access_token);
+    }
+
     public function fetch($connection)
     {
         $access_token = $this->getHeaderAuth();
         $user = new User($connection);
         if ($this->validateAccessToken($user, $connection, $access_token)) {
+            $this->fetchUsername($user, $connection, $access_token);
             $this->getAllMovies($connection);
         }
     }
@@ -68,6 +75,7 @@ class HomeController
             returnResponse('500', 'Internal Server Error.');
         }
     }
+    
 
     public function render($movies_arr)
     {
@@ -84,6 +92,30 @@ class HomeController
                         <div id="logout" class="menu"><a href="#">Logout</a> </div>
                     </div>';
         $html .= '</nav>';
+        $html .= '<div class="main-wrapper">';
+        $html .=    '<div class="side-section-left"></div>';
+        $html .=    '<div class="main-section">';
+        $html .=        '<div class="section-welcome">
+                            <h3> Hello, <span id="username">' . $this->username . '</span>! </h3>
+                            <h4 class="tagline"> Now Playing </h4>
+                        </div>';
+        $html .=        '<div class="section-movies">';
+        foreach ($movies_arr as $movie) {
+            $html .=    '<a href="detail.html?id='. $movie['id_movie'] . '">
+                            <div class="home-page-movie">
+                                <img class="movie-design" src="http://localhost:8080/pictures/movies/movpos_47MetersDown.jpg">
+                                <p class="movie-title">'. $movie['nama'] . '</p>
+                                <div class="review">
+                                    <img class="star-icon" src="../assets/star-icon.png">
+                                    <p> 8.5</p>
+                                </div>
+                            </div>
+                        </a>';
+        }
+        $html .=        '</div>';
+        $html .=    '</div>';
+        $html .=    '<div class="side-section-right"></div>';
+        $html .= '</div>';
         returnResponse('200', $html);
     }
 }
