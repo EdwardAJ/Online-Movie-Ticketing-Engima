@@ -561,4 +561,89 @@ hr {
     padding-right: 0.2rem;
     margin-left: 2rem;
 }
-  
+
+/* Search */
+.section-title {
+    height: 100px;
+}
+
+.section-title h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: -0.3rem;
+    margin-top: 75px;
+}
+
+.section-title .tagline {
+    margin-top: 1.25rem;
+    font-weight: 300;
+    font-size: 0.95rem;
+    color: gray;
+}
+
+.section-search {
+    margin-top: 0.35rem;
+    display: block;
+    flex-wrap: wrap;
+}
+
+.search-card {
+    /*max-width: 140px;
+    height: 100%;*/
+    margin-bottom: 2.5rem;
+    display: flex;
+/*    margin-right: 1.75rem;
+    padding-top: 0.75rem;*/
+}
+
+.image-section .movie-design {
+    height: 182.7px;
+    width: 124.2917px;
+    border-radius: 10px;
+}
+
+.desc-section {
+    display: block;
+    margin-left: 1.75rem;
+    max-width: 60%;
+}
+
+.desc-section h3 {
+    font-weight: 800;
+    
+}
+
+.desc-section .review {
+    margin-top: -0.57rem;
+    display: flex;
+}
+
+.review-score {
+    font-weight: 700;
+}
+
+.synopsis {
+    font-size: 0.8rem;
+    margin-top: -0.75rem;
+    line-height: 1.25rem;
+    max-width: 80%;
+}
+
+.view-detail {
+    margin-top: 18%;
+    margin-right: 2.5rem;
+    display: flex;
+    cursor: pointer;
+}
+
+.view-detail p {
+    color: rgb(0, 192, 236);
+    font-weight: 700;
+    font-size: 15;
+}
+
+.icon-detail {
+    margin-top: 10.5%;
+    margin-left: 10px;
+    color: rgb(0, 192, 236);
+}
