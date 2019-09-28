@@ -18,7 +18,6 @@ function handleAuthResponse (response) {
             window.location.href = FRONT_END_BASE_URL + 'pages/home.html';
         }
     } else {
-        console.log('assaas: ');
         window.location.href = FRONT_END_BASE_URL + 'pages/login.html';
     }
 }
