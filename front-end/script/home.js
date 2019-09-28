@@ -16,7 +16,7 @@ function getAllMovies (access_token) {
 // This function utilizes AJAX to send to backend server.
 function handleResponse (response) {
     if (response.status_code === '200') {
-        document.body.innerHTML += response.message;
+        document.querySelector('.main-section').innerHTML = response.message;
     } else {
         // Returns HTML
          window.location.href = FRONT_END_BASE_URL + 'pages/login.html';
