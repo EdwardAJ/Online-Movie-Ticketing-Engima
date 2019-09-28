@@ -7,13 +7,7 @@ var keyword = getKeywordParams();
 var access_token = getCookie('Authorization');
 getAllMoviesByKeyword(access_token, 1, keyword);
 
-window.onclick = e => {
-    console.log(e.target.id);
-    if (e.target.id >= 1 && e.target.id <= 5) {
-        // console.log('ahahah');
-        getAllMoviesByKeyword(access_token, e.target.id, keyword);
-    }
-}
+showPaginationButtons();
 
 function getAllMoviesByKeyword (access_token, page, keyword) {
     var url = BACK_END_BASE_URL + 'home/fetch?page=' + page  + '&keyword=' + keyword;
@@ -33,14 +27,19 @@ function handleResponse (response) {
     }
 }
 
-function getPageParams () {
-    var url = new URL(window.location.href);
-    var page = url.searchParams.get("page");
-    return page;
-}
-
 function getKeywordParams () {
     var url = new URL(window.location.href);
     var keyword = url.searchParams.get("keyword");
     return keyword;
+}
+
+function showPaginationButtons () {
+
+}
+
+window.onclick = e => {
+    console.log(e.target.id);
+    if (e.target.id >= 1 && e.target.id <= 5) {
+        getAllMoviesByKeyword(access_token, e.target.id, keyword);
+    }
 }
