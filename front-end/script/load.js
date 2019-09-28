@@ -5,13 +5,21 @@ import { getCookie } from '../utils/cookie.js';
 var keyword = getKeywordParams();
 
 var access_token = getCookie('Authorization');
+getAllMoviesByKeyword(access_token, 1, keyword);
 
-getAllMoviesByKeyword(access_token, keyword);
+window.onclick = e => {
+    console.log(e.target.id);
+    if (e.target.id >= 1 && e.target.id <= 5) {
+        // console.log('ahahah');
+        getAllMoviesByKeyword(access_token, e.target.id, keyword);
+    }
+}
 
-function getAllMoviesByKeyword (access_token, keyword) {
-    var url = BACK_END_BASE_URL + 'home/fetch?page=' + getPageParams() + '&keyword=' + keyword;
+function getAllMoviesByKeyword (access_token, page, keyword) {
+    var url = BACK_END_BASE_URL + 'home/fetch?page=' + page  + '&keyword=' + keyword;
     sendAJAXRequest(null, "GET", url, function (response) {
         handleResponse(response);
+        console.log(response);
     }, access_token);
 }
 
