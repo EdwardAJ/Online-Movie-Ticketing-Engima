@@ -7,7 +7,7 @@ var modal = document.getElementById("modal");
 var seat = document.querySelectorAll("button.seat");
 var not_booked = document.getElementById("booking-message").children;
 var go_transaction = document.getElementById('modal-button');
-var current_seatID = null;
+var current_seat = null;
 
 // Show block
 button.onclick = function(){
@@ -15,17 +15,17 @@ button.onclick = function(){
 }
 
 //Change seat number when clicked button
-function seatClicked(id){
-    document.getElementById("movie-selected-seat").innerHTML = "Seat #" + id;
-
-}
-
 // Get id of seat
 window.onclick = e => {
     current_seat = e.target.id
+    if (e.target.id >=1 && e.target.id<=30){
+        console.log('aaa');
+        document.getElementById("movie-selected-seat").innerHTML = "Seat #" + e.target.id;
+    }
 }
 
 // Show movie details when clicked on seat
+var i;
 for (i=0; i<seat.length; i++){
     seat[i].addEventListener('click', function() {
         not_booked[1].style.display = "none";
