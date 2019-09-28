@@ -153,7 +153,8 @@ class HomeController
         returnSearch('200', $html, $count);
     }
 
-    public function renderSearchNotFound($keyword) {
+    public function renderSearchNotFound($keyword)
+    {
         $html .= '<div class="section-title">';
         $html .=    '<h3> Showing search result for keyword "<span id="keyword">'. $keyword . '</span>" </h3>';
         $html .=    '<h4 class="tagline"> 0 results available </h4>';
