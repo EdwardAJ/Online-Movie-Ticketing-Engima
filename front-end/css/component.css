@@ -108,7 +108,7 @@ a:-webkit-any-link{
 
 .side-section-left {
     background-color: rgb(99,99,99);
-    width: 12.5vw;
+    width: 10vw;
     margin-left: -15px;
     /* margin-top: -15px; */
     margin-bottom: -15px;
@@ -116,7 +116,7 @@ a:-webkit-any-link{
 
 .side-section-right {
     background-color: rgb(99,99,99);
-    width: 12.5vw;
+    width: 10vw;
     margin-right: -15px;
     /* margin-top: -15px; */
     margin-bottom: -15px;
@@ -124,7 +124,7 @@ a:-webkit-any-link{
 
 
 .main-section {
-    width: 75vw;
+    width: 80vw;
     padding-left: 6.5vw;
     display: block;
 }
