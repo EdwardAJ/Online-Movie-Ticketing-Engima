@@ -23,7 +23,6 @@
 
 .footer-form {
     font-size: 0.85rem;
-    
 }
 
 .input{
@@ -100,6 +99,119 @@ a:-webkit-any-link{
     font-family: 'Raleway';
 }
 
+/* home.html */
+.main-wrapper {
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    min-height: 100vh;
+}
+
+.side-section-left {
+    background-color: rgb(99,99,99);
+    width: 12.5vw;
+    margin-left: -15px;
+    /* margin-top: -15px; */
+    margin-bottom: -15px;
+}
+
+.side-section-right {
+    background-color: rgb(99,99,99);
+    width: 12.5vw;
+    margin-right: -15px;
+    /* margin-top: -15px; */
+    margin-bottom: -15px;
+}
+
+
+.main-section {
+    width: 75vw;
+    padding-left: 6.5vw;
+    display: block;
+}
+
+.section-welcome #username {
+    color: rgb(0, 192, 236);
+}
+
+.tagline {
+    margin-top: 2.25rem;
+}
+
+.section-movies {
+    margin-top: 0.35rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.section-welcome {
+    height: 100px;
+}
+
+.section-welcome h3 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: -0.25rem;
+    margin-top: 50px;
+}
+
+.section-welcome h4 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.line-break {
+    width: 100%;
+  }
+
+.home-page-movie {
+    max-width: 140px;
+    height: 100%;
+    display: block;
+    margin-right: 1.75rem;
+    padding-top: 0.75rem;
+}
+
+.home-page-movie .review {
+    margin-top: -0.5rem;
+    display: flex;
+}
+
+.review p {
+    margin-left: 0.5rem;
+    margin-top: 0.125rem;
+    color: rgb(181,181,181);
+}
+
+.home-page-movie p {
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.movie-title {
+    color: black;
+}
+
+.home-page-movie .movie-design {
+    height: 219.24px;
+    width: 149.15px;
+    border-radius: 10px;
+}
+
+.search-bar {
+    height: 1rem;
+    width: 1rem;
+    position: relative;
+    top: 3px;
+}
+
+.star-icon {
+    height: 1.25rem;
+    width: 1.25rem;
+}
+
+.icon-layout {
+    margin-left: -10%;
+}
 /* B I O S K O P */
 body{
     margin: 0;
@@ -107,23 +219,23 @@ body{
     font-family: 'Raleway';
 }
 
-.container-navbar{
-    height: 55px;
-    padding-left: 10rem;
-    padding-right: 10rem;
-}
-.navbar-brand{
-    padding-left:0.1rem;
-    font-size: 18px;
-}
+
 .navbar{
-    height: 55px;
+    height: 60px;
     box-shadow: 1px -1px 3px 0px #00000033, 
                 -1px 2px 3px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    min-width: 600px;
 }
 .navbar a {
     color:rgb(1,1,1);
     font-weight:500;
+}
+
+.navbar-brand{
+    margin-top: 20px;
+    margin-left: 17.25%;
+    font-size: 18px;
 }
 
 /* Transaction, Logout */
@@ -144,32 +256,47 @@ body{
     color: rgb(162,162,162);
 }
 .search{
-    width: 29.5%;
-    padding-top:0.4rem;
-    padding-bottom:0.4rem;
-    padding-right:1.1rem;
-    float: none;
-    margin-left:4rem;
-    margin-top:1rem;
-    font-weight:500;
+    width: 25vw;
+    height: 33px;
+    margin-top: 13.5px;
+    font-weight: 500;
+}
+
+.search-section {
+    margin-left: 6.5%;
+    min-width: 200px;
 }
 
 .search::placeholder{
     color: rgb(123,123,123);
 }
 .menu-list {
-    text-align: right;
-    list-style-type: none;
-    margin: 0;
-    float: right;
-    padding-top:1.3rem;
+    display: flex;
+    margin-left: 17vw;
+}
+
+@media only screen and (max-width: 800px) {
+    .menu-list {
+        margin-left: 0;
+    }
+
+    .menu-list #logout {
+        margin-left: 0;
+    }
+
+    .icon-layout {
+        margin-left: -14.5%;
+    }
+
+}
+
+.menu-list #logout {
+    margin-left: 50%;
 }
 
 .menu {
-    display: inline;
-    padding-left: 2rem;
-    padding-right:2rem;
-    font-size:12px;
+    margin-top: 22.5px;
+    font-size: 12px;
     font-style: black;
 }
 

@@ -1,5 +1,8 @@
+import { FRONT_END_BASE_URL, BACK_END_BASE_URL } from '../utils/const.js';
+import { sendAJAXRequest } from '../utils/ajax.js';
+
 // Error IDs array to be reset and shown in HTML.
-allErrorIDs = [
+var allErrorIDs = [
     'wrong-username',
     'wrong-email',
     'wrong-no_hp',
@@ -69,18 +72,10 @@ function showPasswordErrorsHTMLContents () {
 // This function utilizes AJAX to send to backend server.
 function sendInformationToBackEnd (username, email, phone, password, picture) {
     var payload = makeRegisterJSON(username, email, phone, password, picture);
-    var xhr = new XMLHttpRequest();
-    // Call a function when the state changes.
-    xhr.onreadystatechange = function() {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-            var response = JSON.parse(this.responseText);
-            // Backend returns JSON, handled by following function:
-            handleRegisterResponse(response);
-        }
-    }
-    xhr.open("POST", 'http://localhost:8080/user/register');
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(JSON.stringify(payload));
+    var url = BACK_END_BASE_URL + 'user/register';
+    sendAJAXRequest(payload, "POST", url, function(response) {
+        handleRegisterResponse(response);
+    });
 }
 
 function makeRegisterJSON (username, email, phone, password, picture) {
@@ -114,7 +109,6 @@ function handleBadResponse (response) {
 
 // Change error text in HTML, assign it with messages from the backend.
 function changeWrongContents (errorIDs) {
-    console.log('errors: ', errorIDs);
     Object.keys(errorIDs).forEach(wrongID => {
         document.getElementById(wrongID).innerHTML = errorIDs[wrongID];
     })
@@ -128,6 +122,7 @@ function handleSuccessResponse () {
     document.getElementById('password').style.borderColor = "green";
     document.getElementById('reconfirmPassword').style.borderColor = "green";
     document.getElementById('file-name').style.borderColor = "green";
+    // window.location.href = FRONT_END_BASE_URL + 'pages/login.html';
 }
 
 // This function is fetched from https://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript

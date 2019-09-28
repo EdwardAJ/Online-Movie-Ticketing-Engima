@@ -1,8 +1,8 @@
-
 <?php
 
-require 'src/back-end/config/database_connection.php';
-require 'src/back-end/routes/router.php';
+# Call file
+require 'config/database_connection.php';
+require 'routes/router.php';
 
 /*
  *  CORS setup
@@ -26,13 +26,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
-    echo $_SERVER['REQUEST_METHOD'];
     exit(0);
 }
 
 // Getting request.
 $request = $_SERVER['REQUEST_URI'];
-$explode_url = explode('/', $request);
+$explode_url = explode('/', $request); // Split request with delimiter '/'
 
 // Assign controller and action, passed through routing.
 $controller = $explode_url[1];
@@ -48,7 +47,8 @@ $connection = $database->connect();
 /*
  * Route every single request: call router.php
  */
-$router = new Router();
-$router->route($controller, $action, $database->connection);
-
+if ($controller != 'back-end') {
+    $router = new Router();
+    $router->route($controller, $action, $database->connection);
+}
 ?>

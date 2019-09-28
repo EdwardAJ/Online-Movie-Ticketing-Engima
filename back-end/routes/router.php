@@ -1,7 +1,7 @@
 <?php
 
-require_once 'src/back-end/controllers/user_Controller.php';
-require_once 'src/back-end/app/Engima_Error.php';
+require_once 'controllers/user_Controller.php';
+require_once 'app/Engima_Error.php';
 
 class Router {
     public function route ($controller, $action, $connection) {
