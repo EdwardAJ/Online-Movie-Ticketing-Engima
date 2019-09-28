@@ -26,8 +26,8 @@ class Seat
     }
 
     public function getStatus ($database){
-        // $query = "SELECT id_seat, harga, status FROM" . $this->table . "AS e NATURAL JOIN" . 'engima.transaction' . "AS u ON" . $this-> "=" . $transaction->id_seat .
-        // "AND" .$this->table->id_schedule "=" .$transaction->table->id_schedule ";"
+        $query = "SELECT id_seat, harga, status FROM" . $this->table . "NATURAL JOIN" . 'engima.transaction' . "')";
+        // $query = "SELECT id_seat, harga, status FROM" .
         $execute = $mysqli_query($database,$query);
         $result = $mysqli_fetch_array($execute);
     }
