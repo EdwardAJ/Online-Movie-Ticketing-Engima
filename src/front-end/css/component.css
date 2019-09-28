@@ -87,15 +87,22 @@ a:-webkit-any-link{
 	padding-left:16px;
 	font-family: 'Raleway';
 	color: black;
+<<<<<<< HEAD
 	position: fixed;
 	top:0;	
 	width: 100%;
+=======
+>>>>>>> 3ad0b15844bb7d6815e7bc620a187e2f226dc17f
 }
 
 .logo{
 	float: left;
 	display: block;
+<<<<<<< HEAD
 	font-size: 15pt;
+=======
+	font-size: 14pt;
+>>>>>>> 3ad0b15844bb7d6815e7bc620a187e2f226dc17f
 	text-align: center;
 	padding: 14px 16px;
 	/*background-color: red;*/
@@ -103,6 +110,7 @@ a:-webkit-any-link{
 	margin-left: 10%;
 }
 
+<<<<<<< HEAD
 .logout{
 	float: right;
 	display: block;
@@ -140,3 +148,8 @@ a:-webkit-any-link{
 	font-family: 'Raleway';
 	margin-left: 10%;
 }
+=======
+.topnav a strong{
+	color: rgb(0,192,236);
+}
+>>>>>>> 3ad0b15844bb7d6815e7bc620a187e2f226dc17f

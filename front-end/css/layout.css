@@ -16,7 +16,12 @@ p {
     font-family: 'Raleway';
 }
 
+<<<<<<< HEAD
 body {
 	margin: 0;
 	background-color: black;
+=======
+body{
+	margin: 0;
+>>>>>>> 3ad0b15844bb7d6815e7bc620a187e2f226dc17f
 }
