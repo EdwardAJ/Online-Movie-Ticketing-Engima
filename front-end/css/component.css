@@ -107,16 +107,16 @@ a:-webkit-any-link{
 }
 
 .side-section-left {
-    background-color: rgb(99,99,99);
-    width: 10vw;
+    background:rgb(38,38,38);
+    width: 12.5vw;
     margin-left: -15px;
     /* margin-top: -15px; */
     margin-bottom: -15px;
 }
 
 .side-section-right {
-    background-color: rgb(99,99,99);
-    width: 10vw;
+    background:rgb(38,38,38);
+    width: 12.5vw;
     margin-right: -15px;
     /* margin-top: -15px; */
     margin-bottom: -15px;
@@ -124,8 +124,8 @@ a:-webkit-any-link{
 
 
 .main-section {
-    width: 80vw;
-    padding-left: 6.5vw;
+    width: 75vw;
+    padding-left: 10vw;
     display: block;
 }
 
@@ -167,7 +167,8 @@ a:-webkit-any-link{
     max-width: 140px;
     height: 100%;
     display: block;
-    margin-right: 1.75rem;
+    margin-right: 2rem;
+    padding-right: 0.5rem;
     padding-top: 0.75rem;
 }
 
@@ -193,7 +194,7 @@ a:-webkit-any-link{
 
 .home-page-movie .movie-design {
     height: 219.24px;
-    width: 149.15px;
+    width: 151px;
     border-radius: 10px;
 }
 
@@ -207,8 +208,18 @@ a:-webkit-any-link{
 .star-icon {
     height: 1.25rem;
     width: 1.25rem;
+    vertical-align: top;
+    display: inline-block;
 }
 
+.rev {
+    height: 0.7rem;
+    width: 0.7rem;
+    margin-left: 0px;
+    vertical-align: top;
+    display: inline-block;
+    padding-top:0.1rem;
+}
 .icon-layout {
     margin-left: -10%;
 }
@@ -336,15 +347,17 @@ body{
 }
 .movie-header{
     padding-left:1rem;
-    letter-spacing: 1px;
+    margin-top:1rem;
     vertical-align: top;
     display: inline-block;
+    width:60%;
+    letter-spacing: 1px;
+    text-align: justify;
 }
 
 .title{
-    
     padding-top:0.5rem;
-    padding-bottom:0.4rem;
+    padding-bottom:0.75rem;
     font-size:18px;
     font-weight: bold;
 }
@@ -373,6 +386,10 @@ hr {
     border-right: 1px solid  #ccc;
 }
 
+.of-schedule{
+    border-right-style: hidden;
+    width: 50%;
+}
 .seat-row{
     width: 95%;
     
@@ -414,7 +431,7 @@ hr {
     color:white;
 }
 
-.booking-message{
+#booking-message{
     width: 50%;
     float:right;
     padding-left: 2rem;
@@ -436,6 +453,9 @@ hr {
     color: rgb(180,180,180);
 }
 
+#booked{
+    display: none;
+}
 .screen-img{
     
     width: 93%; 
@@ -562,111 +582,167 @@ hr {
     margin-left: 2rem;
 }
 
-/* Search */
-.section-title {
-    height: 100px;
+.movie-design{
+    height: 240.24px;
+    width: 200px;
+    border-radius: 8px;
 }
 
-.section-title h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: -0.3rem;
-    margin-top: 75px;
+.movie-detail{
+    font-size: 25px;
 }
 
-.section-title .tagline {
-    margin-top: 1.25rem;
+.detail-genre{
+    font-size:13px;
+    font-weight:550;
+    padding-bottom: 0.5rem;
+    color:rgb(9,121,152);
+}
+
+.detail-released-time{
+    font-size: 13px;
+    font-weight:550;
+    padding-bottom:0.5rem;
+}
+
+.detail-summary{
+    font-size:11px;
     font-weight: 300;
-    font-size: 0.95rem;
-    color: gray;
 }
 
-.section-search {
-    margin-top: 0.35rem;
-    display: block;
-    flex-wrap: wrap;
+.spacing{
+    line-height: 18px;
+    margin-top: 0.5rem;
 }
 
-.search-card {
-    /*max-width: 140px;
-    height: 100%;*/
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    display: flex;
-    border-bottom: 1px solid gray;
-    max-width: 90%;
-/*    margin-right: 1.75rem;
-    padding-top: 0.75rem;*/
+.spacing-review{
+    line-height: 18px;
+    margin-top: 0rem;
+}
+.review{
+    position: relative;
+    padding-bottom:0.5rem;
 }
 
-.image-section .movie-design {
-    height: 182.7px;
-    width: 124.2917px;
-    border-radius: 10px;
+.rating{
+    margin:0px 0px;
+    vertical-align: top;
+    display: inline-block;
+}
+.rate{
+    padding:0;
+    margin-left:1px;
+    font-weight: 510;
+    color: rgb(90,90,90);
+    vertical-align: top;
+    display: inline-block;
 }
 
-.desc-section {
-    display: block;
-    margin-left: 1.75rem;
-    max-width: 60%;
+.smaller{
+    font-size:11px;
 }
-
-.desc-section h3 {
-    font-weight: 800;
-    
-}
-
-.desc-section .review {
-    margin-top: -0.57rem;
-    display: flex;
-}
-
-.review-score {
-    font-weight: 700;
-}
-
-.synopsis {
-    font-size: 0.8rem;
-    margin-top: -0.75rem;
-    line-height: 1.25rem;
-    /*max-width: 80%;*/
-}
-
-.view-detail {
-    margin-top: 20%;
-    margin-left: 5.25%;
-    display: flex;
-    cursor: pointer;
-}
-
-.view-detail p {
-    color: rgb(0, 192, 236);
-    font-weight: 700;
-    font-size: 15;
-}
-
-.icon-detail {
-    margin-top: 10.5%;
-    margin-left: 10px;
-    color: rgb(0, 192, 236);
-}
-
-.section-pagination {
-    justify-content: center;
-    display: flex;
-    margin-right: 10%;
-}
-
-.section-pagination p {
-    font-size: 0.85rem;
+.per-rate{
+    font-size:10px;
     font-weight: 600;
+    vertical-align: sub;
+}
+
+.container-details{
+    padding-left: 0;
+    padding-top:2.5rem;
+}
+
+.schedule {
+    margin-top: 0.2rem;
+    padding-left:1rem;
+    padding-right:1rem;
+    width:90%;
+}
+
+.title-schedule{
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+    margin-top:0rem;
+    margin-bottom:0rem;
+}
+table {
+    border-collapse: collapse;
+    font-size:10px;
+    width: 99%;
+}
+tr {
+    padding: 0.1rem;
+}
+
+.list-schedule:hover{
+    background-color: rgb(181,181,181);
+}
+
+.last {
+    border-bottom-style: hidden;
+}
+th,td{
+    padding-left:0px;
+    padding-top: 10px;
+    padding-bottom:10px;
+    padding-right:20px;
+    border-bottom: 1px solid rgb(200,200,200);
+    text-align: left;
+    font-weight: 600;
+    color: rgb(123,123,123);
+}
+
+th .red{
+    color:red;
+}
+
+.seats-availability{
+    color:black;
+}
+.link-book{
+    text-align: right;
+    padding-right:0.3rem;
+    margin-right: 0;
+}
+
+.symbol-book{
+    text-align: right;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.review-user {
+    margin-top: 0.2rem;
+    margin-left:1rem;
+    padding-left:1rem;
+    padding-right:1rem;
+}
+
+.fa-times-circle{
+    color:red;
+}
+
+.fa-chevron-circle-right{
     color: rgb(0, 192, 236);
     margin-left: 2%;
     margin-right: 1%;
 }
 
-.section-pagination .seat {
-    margin-right: 1%;
+.profile-pic{
+    width:1%;
+    padding-top:0rem;
+    padding-bottom:2.5rem;
+}
+
+.star{
+    padding-bottom:0.3rem;
+    padding-top:0.3rem;
+    position: relative;
+}
+.review-message{
+    width:80%;
+    padding-top:1rem;
+    padding-bottom:0;
 }
 
 #next, #back {

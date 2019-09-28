@@ -1,5 +1,7 @@
 export function sendAJAXRequest (payload, method_request, url, callback, auth) {
     var xhr = new XMLHttpRequest();
+    console.log(payload);
+    console.log(auth);
     // Call a function when the state changes.
     xhr.onreadystatechange = function() {
         if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
