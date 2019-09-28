@@ -55,14 +55,18 @@ class HomeController
         $this->username = $user->fetchUsername($connection, $access_token);
     }
 
-    public function fetch($connection)
+    public function fetch($connection, $params)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $access_token = $this->getHeaderAuth();
             $user = new User($connection);
             if ($this->validateAccessToken($user, $connection, $access_token)) {
                 $this->fetchUsername($user, $connection, $access_token);
-                $this->getAllMovies($connection);
+                if ($params['keyword']) {
+                    $this->getAllMoviesWithKeyword($connection, $params);
+                } else {
+                    $this->getAllMovies($connection);
+                }
             }
         } else {
             returnResponse('500', 'Invalid HTTP REQUEST.');
@@ -79,26 +83,23 @@ class HomeController
             returnResponse('500', 'Internal Server Error.');
         }
     }
-    
 
+    public function getAllMoviesWithKeyword($connection, $params)
+    {
+        $movie = new Movie($connection);
+        $movies_arr = $movie->getAllMoviesWithKeyword($connection, $params);
+        // Count rows in movies_arr:
+        if (count($movies_arr) != 0) {
+            $count_arr = $movie->countAllMoviesWithKeyWord($connection, $params);
+            $count = $count_arr[0];
+            $this->renderSearchFound($movies_arr, $count, $params['keyword']);
+        } else {
+            $this->renderSearchNotFound($params['keyword']);
+        }
+    }
+    
     public function render($movies_arr)
     {
-        $html .= '<nav class="navbar">';
-        $html .=    '<div class="navbar-brand">
-                        <a href="#"><span class="bold">Engi</span>ma</a>
-                    </div>
-                    <div class="search-section">
-                        <input class="input search" type ="text" placeholder="Search movie">
-                        <a href="search.html"> <img src="../assets/search-bar.png" class="search-bar icon-layout"> </a>
-                    </div>
-                    <div class="menu-list">
-                        <div id="transactions" class="menu"><a href="#">Transactions</a></div>
-                        <div id="logout" class="menu"><a href="#">Logout</a> </div>
-                    </div>';
-        $html .= '</nav>';
-        $html .= '<div class="main-wrapper">';
-        $html .=    '<div class="side-section-left"></div>';
-        $html .=    '<div class="main-section">';
         $html .=        '<div class="section-welcome">
                             <h3> Hello, <span id="username">' . $this->username . '</span>! </h3>
                             <h4 class="tagline"> Now Playing </h4>
@@ -117,9 +118,48 @@ class HomeController
                         </a>';
         }
         $html .=        '</div>';
-        $html .=    '</div>';
-        $html .=    '<div class="side-section-right"></div>';
+        returnResponse('200', $html);
+    }
+
+    public function renderSearchFound($movies_arr, $count, $keyword)
+    {
+        $html .= '<div class="section-title">';
+        $html .=    '<h3> Showing search result for keyword "<span id="keyword">'. $keyword . '</span>" </h3>';
+        $html .=    '<h4 class="tagline">'. $count . ' results available </h4>';
         $html .= '</div>';
+        $html .= '<div class="section-search">';
+        foreach ($movies_arr as $movie) {
+            $html .= '<div class="search-card">';
+            $html .=    '<div class="image-section">
+                            <img class="movie-design" src="http://localhost:8080/pictures/movies/movpos_47MetersDown.jpg">
+                        </div>';
+            $html .=    '<div class="desc-section">';
+            $html .=        '<h3>'. $movie['nama'] .'</h3>';
+            $html .=        '<div class="review">
+                                <img class="star-icon" src="../assets/star-icon.png">
+                                <p class="review-score"> 8.5</p>
+                             </div>';
+            $html .=        '<div class="synopsis">
+                                <p>'. $movie['sinopsis'] .'</p>
+                            </div>';
+            $html .=    '</div>';
+            $html .=    '<div id="'. $movie['id_movie'] . '" class="view-detail fa-lg">
+                            <p> View details </p>
+                            <i class="fa fa-arrow-circle-right icon-detail"></i>
+                         </div>';
+            $html .= '</div>';
+        }
+        $html .= '</div>';
+        returnSearch('200', $html, $count);
+    }
+
+    public function renderSearchNotFound($keyword)
+    {
+        $html .= '<div class="section-title">';
+        $html .=    '<h3> Showing search result for keyword "<span id="keyword">'. $keyword . '</span>" </h3>';
+        $html .=    '<h4 class="tagline"> 0 results available </h4>';
+        $html .= '</div>';
+        $html .= '<div class="section-search">';
         returnResponse('200', $html);
     }
 }

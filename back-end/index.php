@@ -33,11 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 // Getting request.
 $request = $_SERVER['REQUEST_URI'];
-$explode_url = explode('/', $request); // Split request with delimiter '/'
+$url_components = parse_url($request);
+parse_str($url_components['query'], $params);
+
+$explode_url = explode('/', $request);
 
 // Assign controller and action, passed through routing.
 $controller = $explode_url[1];
-$action = $explode_url[2];
+$query_arr = explode('?', $explode_url[2]);
+$action = $query_arr[0];
 
 /*
  *  Database connection.
@@ -51,5 +55,5 @@ $connection = $database->connect();
  */
 if ($controller != 'back-end') {
     $router = new Router();
-    $router->route($controller, $action, $database->connection);
+    $router->route($controller, $action, $params, $database->connection);
 }

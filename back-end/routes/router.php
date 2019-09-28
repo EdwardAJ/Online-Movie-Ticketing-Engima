@@ -2,10 +2,9 @@
 
 require_once 'controllers/userController.php';
 require_once 'controllers/homeController.php';
-
 class Router
 {
-    public function route($controller, $action, $connection)
+    public function route($controller, $action, $params, $connection)
     {
         $controller_class_name = "\\Controllers\\" . ucfirst($controller) . 'Controller';
         // Instantiate object with error handling
@@ -14,7 +13,7 @@ class Router
                 $object = new $controller_class_name();
                 // Call object's method.
                 if (method_exists($object, $action)) {
-                    $object->$action($connection);
+                    $object->$action($connection, $params);
                 } else {
                     throw new \Exception('Action not found!');
                 }
