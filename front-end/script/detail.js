@@ -30,3 +30,18 @@ function getIDParams () {
     var id = url.searchParams.get("id");
     return id;
 }
+
+
+function isSchedule (params) {
+    if (params.slice(0,3) === 'sch') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+window.onclick = e => {
+    if (isSchedule(e.target.id)) {
+        window.location.href = FRONT_END_BASE_URL + "pages/bioskop.html?id=" + e.target.id;
+    }
+}
