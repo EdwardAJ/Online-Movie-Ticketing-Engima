@@ -38,4 +38,15 @@ class Seat
             return '500';
         }
     }
+
+    public function getMovieDetail ($database){
+        $query = "SELECT nama, date, time, harga, id_seat FROM " .$this->table . " NATURAL JOIN " . 'engima.schedule' . " NATURAL JOIN" . 'engima.movie' . "';";
+        $execute = mysqli_query($database, $query);
+        $result = mysqli_fetch_all($execute, MYSQLI_ASSOC);
+        if ($result) {
+            return $result;
+        } else {
+            return '500';
+        }
+    }
 }

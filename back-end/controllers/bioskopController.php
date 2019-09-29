@@ -160,6 +160,37 @@ class BioskopController {
             return false;
         }
     }
+
+    public function renderHeader($result){
+        $html.= '<div class="movie-header">
+        <div class="title">'.$result[0].'
+        </div>
+        <div class="showtime">'
+            .$result[1].'-'.$result[2].'
+        </div>
+        </div>';
+
+        returnResponse('200',$html);
+    }
+
+    public function renderView ($result){
+        $html.= '<div class="movie-detail">
+        <p id="movie-selected-title">' .$result[0].'</p>
+        <p id="movie-selected-time">' .$result[1]. '-' .$result[2]. '</p>
+    </div>';
+
+    returnResponse('200', $html);
+    }
+
+    public function getDataFilm (){
+        $seat = new Seat();
+        $result = $seat->getMovieDetail($database);
+        if ($result != '500') {
+            $this->renderView($seats_arr);
+        } else {
+            returnResponse('500', 'Internal Server Error.');
+        }
+    }
 }
 
 // DONE
