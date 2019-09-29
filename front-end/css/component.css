@@ -731,6 +731,12 @@ th .red{
     padding-bottom:2.5rem;
 }
 
+.profile-pic-child {
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+}
+
 .star{
     padding-bottom:0.3rem;
     padding-top:0.3rem;
@@ -818,7 +824,7 @@ th .red{
 
 .view-detail {
     margin-top: 20%;
-    margin-left: 5.25%;
+    margin-left: 3%;
     display: flex;
     cursor: pointer;
 }
@@ -862,8 +868,12 @@ th .red{
 }
 
 /* Special case search bioskop no ticket selected and movie detail */
-.search2{
+.search2 {
     width: 25vw;
     margin-top: 13.5px;
     font-weight: 500;
+}
+
+.link-book {
+    cursor: pointer;
 }

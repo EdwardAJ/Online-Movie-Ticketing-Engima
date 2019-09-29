@@ -1,4 +1,5 @@
 <?php namespace Models;
+
 class Seat
 {
     private $connection;
@@ -25,10 +26,11 @@ class Seat
         }
     }
 
-    public function getStatus ($database){
+    public function getStatus($database)
+    {
         $query = "SELECT id_seat, harga, status FROM" . $this->table . "NATURAL JOIN" . 'engima.transaction' . "')";
         // $query = "SELECT id_seat, harga, status FROM" .
-        $execute = $mysqli_query($database,$query);
+        $execute = $mysqli_query($database, $query);
         $result = $mysqli_fetch_array($execute);
     }
 }

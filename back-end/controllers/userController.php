@@ -25,50 +25,58 @@ class UserController
     
     public function register($connection)
     {
-        $user = new User($connection);
-        $data = json_decode(file_get_contents("php://input"));
-        $this->validateUserAttributes($user, $data);
-        if ($this->is_register_validated) {
-            // Check for duplicates in the MYSQL table
-            $this->validateDuplicatedUserAttributes($user, $connection);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user = new User($connection);
+            $data = json_decode(file_get_contents("php://input"));
+            $this->validateUserAttributes($user, $data);
             if ($this->is_register_validated) {
-                // Generate picture.
-                $user->picture_profile_path = $this->generatePicture($user->picture_profile, $user->username);
-                // Generate access token.
-                $user->token = $this->generateAccessToken();
-                // Generate current date.
-                $user->token_expdate = $this->generateCurrentDate();
-                $status = $user->register($connection);
-                if ($status == '200') {
-                    returnResponse($status, 'User has been successfully created.');
-                } else {
-                    returnResponse('500', $status);
+                // Check for duplicates in the MYSQL table
+                $this->validateDuplicatedUserAttributes($user, $connection);
+                if ($this->is_register_validated) {
+                    // Generate picture.
+                    $user->picture_profile_path = $this->generatePicture($user->picture_profile, $user->username);
+                    // Generate access token.
+                    $user->token = $this->generateAccessToken();
+                    // Generate current date.
+                    $user->token_expdate = $this->generateCurrentDate();
+                    $status = $user->register($connection);
+                    if ($status == '200') {
+                        returnResponse($status, 'User has been successfully created.');
+                    } else {
+                        returnResponse('500', $status);
+                    }
                 }
             }
-        }
-        if (!$this->is_register_validated) {
-            returnResponse('500', $this->register_error_array);
+            if (!$this->is_register_validated) {
+                returnResponse('500', $this->register_error_array);
+            }
+        } else {
+            returnResponse('500', 'Invalid HTTP REQUEST.');
         }
     }
 
     public function login($connection)
     {
-        $this->getHeaderAuth();
-        $user = new User($connection);
-        $data = json_decode(file_get_contents("php://input"));
-        $this->validateLoginAttributes($user, $data);
-        if ($this->is_login_validated) {
-            $status = $user->login($connection);
-            if ($status == '200') {
-                if ($this->updateExpiryTime($user, $connection)) {
-                    $this->returnAccessToken($user, $connection);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->getHeaderAuth();
+            $user = new User($connection);
+            $data = json_decode(file_get_contents("php://input"));
+            $this->validateLoginAttributes($user, $data);
+            if ($this->is_login_validated) {
+                $status = $user->login($connection);
+                if ($status == '200') {
+                    if ($this->updateExpiryTime($user, $connection)) {
+                        $this->returnAccessToken($user, $connection);
+                    }
+                } else {
+                    $this->setLoginPasswordError($status);
                 }
-            } else {
-                $this->setLoginPasswordError($status);
             }
-        }
-        if (!$this->is_login_validated) {
-            returnResponse('500', $this->login_error_array);
+            if (!$this->is_login_validated) {
+                returnResponse('500', $this->login_error_array);
+            }
+        } else {
+            returnResponse('500', 'Invalid HTTP REQUEST.');
         }
     }
 
@@ -103,9 +111,13 @@ class UserController
     // This function ensures the provided access token is valid and has not expired yet.
     public function auth($connection)
     {
-        $access_token = $this->getHeaderAuth();
-        $user = new User($connection);
-        $this->validateAccessToken($user, $connection, $access_token);
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $access_token = $this->getHeaderAuth();
+            $user = new User($connection);
+            $this->validateAccessToken($user, $connection, $access_token);
+        } else {
+            returnResponse('500', 'Invalid HTTP REQUEST.');
+        }    
     }
 
     private function validateAccessToken(User $user, $connection, $access_token)

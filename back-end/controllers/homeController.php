@@ -106,7 +106,7 @@ class HomeController
                         </div>';
         $html .=        '<div class="section-movies">';
         foreach ($movies_arr as $movie) {
-            $html .=    '<a href="detail.html?id='. $movie['id_movie'] . '">
+            $html .=    '<a href="movie_detail.html?id='. $movie['id_movie'] . '">
                             <div class="home-page-movie">
                                 <img class="movie-design" src="http://localhost:8080/' . $movie['poster'] .'";">
                                 <p class="movie-title">'. $movie['nama'] . '</p>
