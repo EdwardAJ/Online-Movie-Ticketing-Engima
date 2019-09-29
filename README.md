@@ -39,9 +39,10 @@ Buy Ticket
 ![](screen-shot/screenshot_buyticket.png)
 
 Transaction History
+![](screen-shot/screenshot_transaction.png)
 
 User Review
-
+![](screen-shot/screenshot_review.png)
 ## Pembagian Tugas
 
 ### Frontend
