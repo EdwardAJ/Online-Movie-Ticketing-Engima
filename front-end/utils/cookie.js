@@ -7,7 +7,7 @@ export function createCookie (name, value, days) {
 }
 
 // Get Cookie
-export function getCookie(c_name) {
+export function getCookie (c_name) {
     var i, x, y, ARRcookies = document.cookie.split(";");
     for (i = 0; i < ARRcookies.length; i++) {
         x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
@@ -17,4 +17,9 @@ export function getCookie(c_name) {
             return unescape(y);
         }
     }
+}
+
+// Erase Cookie
+export function eraseCookie (name) {
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
 }
