@@ -51,4 +51,17 @@ class Movie
             return '500';
         }
     }
+
+    public function getAllAttributes($database, $params)
+    {
+        $query = "SELECT * FROM " . $this->table ." WHERE id_movie = '". $params['id'] . "';";
+        // echo $query;
+        $execute = mysqli_query($database, $query);
+        $result = mysqli_fetch_all($execute, MYSQLI_ASSOC);
+        if ($result) {
+            return $result;
+        } else {
+            return '500';
+        }
+    }
 }
