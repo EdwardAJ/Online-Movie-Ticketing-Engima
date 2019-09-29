@@ -2,6 +2,8 @@
 
 require_once 'controllers/userController.php';
 require_once 'controllers/homeController.php';
+require_once 'controllers/bioskopController.php';
+
 class Router
 {
     public function route($controller, $action, $params, $connection)
