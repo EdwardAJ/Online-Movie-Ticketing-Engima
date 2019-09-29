@@ -81,7 +81,7 @@ class DetailController
         $movie = new Movie($connection);
         $movies_arr = $movie->getAllAttributes($connection, $params);
         if ($movies_arr != '500') {
-            $this->movie = $movies_arr;
+            $this->movie = $movies_arr[0];
             return true;
         } else {
             returnResponse('500', 'Internal Server Error.');
@@ -106,8 +106,8 @@ class DetailController
     {
         $review = new Review($connection);
         $review_arr = $review->getMovieReviews($connection, $params);
-        if ($schedule_arr != '500') {
-            $this->reviews = $schedule_arr;
+        if ($review_arr != '500') {
+            $this->reviews = $review_arr;
             return true;
         } else {
             returnResponse('500', 'Internal Server Error.');
@@ -151,20 +151,20 @@ class DetailController
                                         <th>Available Seats</th>
                                         <th class="link-book"></th>
                                         <th class="symbol-book"></th>
-                                    </tr>.';
+                                    </tr>';
         foreach ($this->schedules as $schedule) {
             $class = "";
             $content = "Book Now";
             $class_icon = "fa fa-chevron-circle-right fa-2x";
-            if ($schedule['status'] == 0) {
+            if ($schedule['seat'] == 0) {
                 $class = "red";
                 $content = "Not Available";
-                $class = "fa fa-times-circle fa-2x";
+                $class_icon = "fa fa-times-circle fa-2x";
             }
             $html .= '<tr class="list-schedule">
                         <th>.' . $schedule['date'] . ' </th>
                         <th class="time"> '. $schedule['time'] . '</th>
-                        <th class="seats-availability"> '. $schedule['seat'] . ' </th>
+                        <th class="seats-availability"> '. $schedule['seat'] . ' seats </th>
                         <th id="'. $schedule['id_schedule'] .'" class="link-book"><a class="'. $class .'"> '. $content . '</a></th>
                         <th class="symbol-book"><i class="'. $class_icon .'"></i></th>
                     </tr>';
