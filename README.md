@@ -36,6 +36,7 @@ Film Detail
 ![](screen-shot/screenshot_moviedetail.png)
 
 Buy Ticket
+![](screen-shot/screenshot_buyticket.png)
 
 Transaction History
 

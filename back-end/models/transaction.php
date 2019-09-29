@@ -2,7 +2,7 @@
 class Transaction
 {
     private $connection;
-    private $table = 'engima.movie';
+    private $table = 'engima.transaction';
     // Attributes for MYSQL table:
     public $id_transaction;
     public $username;
@@ -16,8 +16,10 @@ class Transaction
     // Submit username, id_seat, id_schedule
     public function submitTransaction($database)
     {
+        $this->getNewTransactionID($database);
         $query = "INSERT INTO " . $this->table
-                 . " VALUES " . "('" . $this->id_transaction. ", ". $this->username. "', '" . $this->id_seat . "', '" . $this->id_schedule ."')";
+                 . " VALUES " . "(" . $this->id_transaction. ", '". $this->username. "', " . $this->id_seat . ", '" . $this->id_schedule ."')";
+        echo $query;
         if (mysqli_query($database, $query)) {
             return '200';
         } else {

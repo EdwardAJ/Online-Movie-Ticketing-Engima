@@ -9,19 +9,20 @@ var not_booked = document.getElementById("booking-message").children;
 var go_transaction = document.getElementById('modal-button');
 var current_seat = null;
 
-// Show block
-button.onclick = function(){
-    modal.style.display= "block";
-}
-
 //Change seat number when clicked button
 // Get id of seat
 window.onclick = e => {
     current_seat = e.target.id
     if (e.target.id >=1 && e.target.id<=30){
-        console.log('aaa');
+        // console.log('aaa');
         document.getElementById("movie-selected-seat").innerHTML = "Seat #" + e.target.id;
     }
+}
+
+
+button.onclick = function(){
+    modal.style.display= "block"; //show block
+    document.getElementById(e.target.id).disabled = true; 
 }
 
 // Show movie details when clicked on seat
@@ -73,10 +74,23 @@ function sendInformationToBackEnd (id_schedule, id_movie, id_seat, harga, access
     }, access_token);
 }
 
+
 function handleBioskopResponse(response){
     if (response.status_code == '200') {
         handleSuccessResponse();
     } else {
         handleBadResponse(response);
     }
+}
+
+function getIdMovie () {
+    var url = new URL(window.location.href);
+    var keyword = url.searchParams.get("id_movie");
+    return keyword;
+}
+
+function getIdSchedule () {
+    var url = new URL(window.location.href);
+    var keyword = url.searchParams.get("id_schedule");
+    return keyword;
 }
