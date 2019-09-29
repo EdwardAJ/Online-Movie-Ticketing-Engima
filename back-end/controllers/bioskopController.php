@@ -104,7 +104,7 @@ class BioskopController {
             $user = new User($connection);
             $seat = new Seat($connection);
             if ($this->validateAccessToken($user, $connection, $access_token)) {
-                if ($params['schedule']) {
+                if ($params['schedule']) { //if exist param, get all seat
                     $this->getAllSeatStatus($connection, $params, $seat);
                 } else {
                     returnResponse('500', 'Invalid Params.');
