@@ -42,6 +42,6 @@ function isSchedule (params) {
 
 window.onclick = e => {
     if (isSchedule(e.target.id)) {
-        window.location.href = FRONT_END_BASE_URL + "pages/bioskop.html?id=" + e.target.id;
+        window.location.href = FRONT_END_BASE_URL + "pages/bioskop.html?schedule=" + e.target.id;
     }
 }
