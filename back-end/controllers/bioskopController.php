@@ -160,6 +160,58 @@ class BioskopController {
             return false;
         }
     }
+
+    public function renderHeader($result){
+        for ($i=0; $i<count($result); $i++){
+            $html.= '<div class="movie-header">
+            <div class="title">nama
+            </div>
+            <div class="showtime">'
+                .$result[$i]['date'].'-'.$result[$i]['time'].'
+            </div>
+            </div>';
+        }
+
+        returnResponse('200',$html);
+    }
+
+    public function renderView ($result){
+        for ($i=0; $i<count($result); $i++){
+            $html.= '<div class="movie-detail">
+        <p id="movie-selected-title">' .$result[$i]['nama'].'</p>
+        <p id="movie-selected-time">' .$result[$i]['date']. '-' .$result['time']. '</p></div>';
+
+        }
+        returnResponse('200', $html);
+    }
+    public function fetchMovie($connection, $params) 
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $access_token = $this->getHeaderAuth();
+            $user = new User($connection);
+            //$seat = new Seat($connection);
+            $movie = new Movie($connection);
+            if ($this->validateAccessToken($user, $connection, $access_token)) {
+                if ($params['schedule']) { //if exist param, get all seat
+                    $this->getMovieStatus($database, $params, $movie);
+                } else {
+                    returnResponse('500', 'Invalid Params.');
+                }
+            }
+        } else {
+            returnResponse('500', 'Invalid HTTP REQUEST.');
+        }
+    }
+    public function getMovieStatus ($database, $params, Movie $movie)
+    {
+        $movie_arr = $movie->getMovieDetail($database, $params);
+        if ($movie_arr !== '500') {
+            $this->renderView($seat_arr);
+        } else {
+            returnResponse('500', 'Internal Server Error.');
+        }
+    }
+    
 }
 
 // DONE

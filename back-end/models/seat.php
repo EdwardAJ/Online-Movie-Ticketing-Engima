@@ -38,4 +38,5 @@ class Seat
             return '500';
         }
     }
+
 }

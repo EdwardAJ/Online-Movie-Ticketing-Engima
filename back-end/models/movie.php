@@ -64,4 +64,16 @@ class Movie
             return '500';
         }
     }
+
+    public function getMovieDetail ($database, $params){
+        // $query = "SELECT nama, date, time, harga, id_seat FROM " .$this->table . " NATURAL JOIN " . 'engima.schedule' . " NATURAL JOIN" . 'engima.seat' . "WHERE id_schedule ='". $params['schedule'] . "AND id_seat='".$params['id_seat']. "';";    
+        $query = "select nama, date, time, harga, id_seat from 'engima.movie' natural join 'engima.schedule' natural join 'engima.seat' where id_schedule='sch201912281400' and id_seat='10';";
+        $execute = mysqli_query($database, $query);
+        $result = mysqli_fetch_all($execute, MYSQLI_ASSOC);
+        if ($result) {
+            return $result;
+        } else  {
+            return '500';
+        }
+    }
 }
