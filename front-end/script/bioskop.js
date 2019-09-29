@@ -8,14 +8,14 @@ getAllSeats(access_token); // Get seats before loading
 
 function getAllSeats (access_token) {
     var url = BACK_END_BASE_URL + 'bioskop/fetch';
-    sendAJAXRequest(null, "GET", url, function (response) { 
+    sendAJAXRequest(null, "GET", url, function (response){ 
         handleResponse(response);
     }, access_token);
 }
 
 // This function utilizes AJAX to send to backend server.
 function handleResponse (response) {
-    if (response.status_code === '200') {
+    if (response.status_code === '200'){
         document.querySelector('.seat-row').innerHTML = response.message;
     } 
     else {
