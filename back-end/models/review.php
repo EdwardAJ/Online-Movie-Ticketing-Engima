@@ -15,7 +15,7 @@ class Review
         $query = "SELECT *
                   FROM " .  $this->table . " NATURAL JOIN engima.user WHERE
                   id_movie = '" . $params['id'] . "';";
-        echo $query;
+        // echo $query;
         $execute = mysqli_query($database, $query);
         $result = mysqli_fetch_all($execute, MYSQLI_ASSOC);
         if ($result) {

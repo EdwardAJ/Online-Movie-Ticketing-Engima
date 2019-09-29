@@ -63,9 +63,12 @@ class DetailController
             $movie = new Movie($connection);
             if ($this->validateAccessToken($user, $connection, $access_token)) {
                 if ($params['id']) {
-                    $this->getAllAttributesOneMovie($connection, $params);
-                    $this->getMovieSchedules($connection, $params);
-                    $this->getMovieReviews($connection, $params);
+                    $resAtr = $this->getAllAttributesOneMovie($connection, $params);
+                    $resSch = $this->getMovieSchedules($connection, $params);
+                    $resRev = $this->getMovieReviews($connection, $params);
+                    if ($resAtr && $resSch && $resRev) {
+                        $this->render();
+                    }
                 }
             }
         } else {
@@ -79,8 +82,10 @@ class DetailController
         $movies_arr = $movie->getAllAttributes($connection, $params);
         if ($movies_arr != '500') {
             $this->movie = $movies_arr;
+            return true;
         } else {
             returnResponse('500', 'Internal Server Error.');
+            return false;
         }
     }
 
@@ -90,8 +95,10 @@ class DetailController
         $schedule_arr = $schedule->getMovieSchedules($connection, $params);
         if ($schedule_arr != '500') {
             $this->schedules = $schedule_arr;
+            return true;
         } else {
             returnResponse('500', 'Internal Server Error.');
+            return false;
         }
     }
 
@@ -101,8 +108,99 @@ class DetailController
         $review_arr = $review->getMovieReviews($connection, $params);
         if ($schedule_arr != '500') {
             $this->reviews = $schedule_arr;
+            return true;
         } else {
             returnResponse('500', 'Internal Server Error.');
+            return false;
         }
+    }
+
+    public function render()
+    {
+        $html .= '<div class="container-ticket">';
+        $html .=      '<div class="header">
+                            <div class="click-previously">
+                                <img class="movie-design" src="http://localhost:8080/' . $this->movie['poster'] .'">
+                            </div>
+                            <div class="movie-header">
+                                <div class="movie-detail title"> ' . $this->movie['nama'] . '
+                                </div>
+                                <div class="detail-genre"> '. $this->movie['genre'] .
+                                    '| '. $this->movie['runtime'] . ' mins
+                                </div>
+                                <div class ="detail-released-time">
+                                    Released date: '. $this->movie['tanggal_rilis'] . '
+                                </div>
+                                <div class="review">
+                                        <img class="star-icon" src="../assets/star-icon.png">
+                                        <p class="rating"><span class="rate">8.75</span><span class="per-rate">/10</span></p>
+                                </div>
+                                <div class="detail-summary">
+                                    <p class="spacing"> '. $this->movie['sinopsis'] . ' </p>
+                                </div>
+                             </div>
+                        </div>';
+        $html .=    '<div class="flex-container-book container-details">';
+        $html .=        '<div class="seat-selection of-schedule">
+                            <div class="modal-auth schedule">
+                                <p class="title-schedule">Schedules</p>
+                                <table>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th class="time">Time</th>
+                                        <th>Available Seats</th>
+                                        <th class="link-book"></th>
+                                        <th class="symbol-book"></th>
+                                    </tr>.';
+        foreach ($this->schedules as $schedule) {
+            $class = "";
+            $content = "Book Now";
+            $class_icon = "fa fa-chevron-circle-right fa-2x";
+            if ($schedule['status'] == 0) {
+                $class = "red";
+                $content = "Not Available";
+                $class = "fa fa-times-circle fa-2x";
+            }
+            $html .= '<tr class="list-schedule">
+                        <th>.' . $schedule['date'] . ' </th>
+                        <th class="time"> '. $schedule['time'] . '</th>
+                        <th class="seats-availability"> '. $schedule['seat'] . ' </th>
+                        <th id="'. $schedule['id_schedule'] .'" class="link-book"><a class="'. $class .'"> '. $content . '</a></th>
+                        <th class="symbol-book"><i class="'. $class_icon .'"></i></th>
+                    </tr>';
+        }
+        $html .=  '</table>
+                </div>
+            </div>';
+        $html .= '<div class="booking-message detail">
+                        <div class="modal-auth review-user">
+                            <p class="title-schedule">Reviews</p>
+                            <table>';
+        foreach ($this->reviews as $review) {
+            $html .= '<tr>
+                        <th class="profile-pic">
+                            <!-- <i class="fa fa-user-circle fa-3x"></i> -->
+                            <img class="profile-pic-child" src="http://localhost:8080/pictures/users/'. $review['username'] .'">
+                        </th>
+                        <th class="review-message">
+                            <div class="user-name">'. $review['username'] .' </div>
+                            <div class="review star">
+                                    <img class="star-icon rev" src="../assets/star-icon.png">
+                                    <p class="rating"><span class="rate smaller">'. $review['rating'] . ' </span><span class="per-rate">/10</span></p>
+                            </div>
+                            <div class="user-message">
+                                <p class="spacing-review"> '.
+                                    $review['description'] .'
+                                </p> 
+                            </div>
+                        </th>
+                    </tr>';
+        }
+        $html .=  '</table>  
+                    </div>
+                </div>
+            </div>
+        </div>';
+        returnResponse('200', $html);
     }
 }

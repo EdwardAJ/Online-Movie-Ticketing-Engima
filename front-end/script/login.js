@@ -36,6 +36,7 @@ function sendInformationToBackEnd (email, password) {
     var payload = makeLoginJSON(email, password);
     var url = BACK_END_BASE_URL + 'user/login';
     sendAJAXRequest(payload, "POST", url, function(response) {
+        console.log('response: ', response);
         handleLoginResponse(response);
     });
 }

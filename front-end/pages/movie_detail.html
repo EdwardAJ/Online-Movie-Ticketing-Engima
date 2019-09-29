@@ -1,25 +1,26 @@
 <!DOCTYPE html>
+    <script type="module" src="../middleware/middleware.js"></script>
     <head>
         <title>Engima</title>
-        <link rel="stylesheet" href="../css/layout.css">
-        <link rel="stylesheet" href="../css/responsive.css">
         <link rel="stylesheet" href="../css/component.css">
-        <link href="https://fonts.googleapis.com/css?family=Raleway:300,600,700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="../css/layout.css">
+        <link href="https://fonts.googleapis.com/css?family=Raleway: 400,500,600,700,800,900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <!-- NAVBAR -->
         <nav class="navbar">
-                <div class="navbar-brand">
-                    <a href="#"><span class="bold">Engi</span>ma</a>
-                </div>
-                <div class="search-section">
-                     <input class="input search" type ="text" placeholder="Search movie">
-                </div>
-                <div class="menu-list">
-                    <div id="transactions" class="menu"><a href="#">Transactions</a></div>
-                    <div id="logout" class="menu"><a href="#">Logout</a> </div>
-                </div>  
+            <div class="navbar-brand">
+                <a href="home.html"><span class="bold">Engi</span>ma</a>
+            </div>
+            <div class="search-section">
+                <input id="search-input" class="input search2" type ="text" placeholder="Search movie">
+                <img src="../assets/search-bar.png" class="search-bar icon-layout">
+            </div>
+            <div class="menu-list">
+                <div id="transactions" class="menu"><a href="#">Transactions</a></div>
+                <div id="logout" class="menu"><a href="#">Logout</a> </div>
+            </div>  
         </nav>
 
         <!-- BODY -->
@@ -28,164 +29,13 @@
             <div class="side-section-left"></div>
             <!-- Main page -->
             <div class="body-ticket">
-                <div class="container-ticket">
-                    <div class="header">
-                            <div class="click-previously">
-                                <img class="movie-design" src="http://localhost:8080/pictures/movies/movpos_47MetersDown.jpg">
-                            </div>
-                                <!-- Detail movie -->
-                            <div class="movie-header">
-                                <div class="movie-detail title">
-                                    Avengers: Endgame
-                                </div>
-                                <div class="detail-genre">
-                                    Drama, Fantasy, Adventure | 187 mins
-                                </div>
-                                <div class ="detail-released-time">
-                                    Released date: April 17, 2019
-                                </div>
-                                <div class="review">
-                                        <img class="star-icon" src="../assets/star-icon.png">
-                                        <p class="rating"><span class="rate">8.75</span><span class="per-rate">/10</span></p>
-                                </div>
-                                <div class="detail-summary">
-                                    <p class="spacing">
-                                        After the devastating events of Avengers: Infinity War(2018), the universe is in ruins. With 
-                                        the help of remaining allies, the Avenger assemble once more in order to reverse Thanos' actions
-                                        and restore balance to the universe.
-                                    </p>
-                                </div>
-                             </div>
-                    </div>
-                    <!-- Cinema Schedule -->
-                    <div class="flex-container-book container-details">
-                        <div class="seat-selection of-schedule">
-                            <div class="modal-auth schedule">
-                                <p class="title-schedule">Schedules</p>
-                                <table>
-                                    <tr>
-                                        <th>Date</th>
-                                        <th class="time">Time</th>
-                                        <th>Available Seats</th>
-                                        <th class="link-book"></th>
-                                        <th class="symbol-book"></th>
-                                    </tr>
-                                    <tr class="list-schedule">
-                                        <th>September 3, 2019</th>
-                                        <th class="time">06.30 PM</th>
-                                        <th class="seats-availability">10 seats</th>
-                                        <th class="link-book"><a class ="red" href=# onclick="return false;">Not Available</a></th>
-                                        <th class="symbol-book"><i class="fa fa-times-circle fa-2x"></i></th>
-                                    </tr>
-                                    <tr class="list-schedule">
-                                        <th>September 3, 2019</th>
-                                        <th class="time">06.30 PM</th>
-                                        <th class="seats-availability">10 seats</th>
-                                        <th class="link-book"><a  href=# onclick="return false;">Book Now</a></th>
-                                        <th class="symbol-book"><i class="fa fa-chevron-circle-right fa-2x"></i></th>
-                                    </tr>
-                                    <tr class="list-schedule">
-                                        <th>September 5, 2019</th>
-                                        <th class="time">08.20 PM</th>
-                                        <th class="seats-availability">0 seats</th>
-                                        <th class="link-book"><a class ="red" href=# onclick="return false;">Not Available</a></th>
-                                        <th class="symbol-book"><i class="fa fa-times-circle fa-2x"></i></th>
-                                    </tr>
-                                    <tr class="list-schedule">
-                                        <th>September 7, 2019</th>
-                                        <th class="time">04.00 PM</th>
-                                        <th class="seats-availability">25 seats</th>
-                                        <th class="link-book"><a href=# onclick="return false;">Book Now</a></th>
-                                        <th class="symbol-book"><i class="fa fa-chevron-circle-right fa-2x"></i></th>
-                                    </tr> 
-                                    <tr class="list-schedule">
-                                        <th>September 7, 2019</th>
-                                        <th class="time">06.30 PM</th>
-                                        <th class="seats-availability">20 seats</th>
-                                        <th class="link-book"><a href=# onclick="return false;">Book Now</a></th>
-                                        <th class="symbol-book"><i class="fa fa-chevron-circle-right fa-2x"></i></th>
-                                    </tr>
-                                    <tr class="list-schedule">
-                                        <th>September 7, 2019</th>
-                                        <th class="time">09.00 PM</th>
-                                        <th class="seats-availability">25 seats</th>
-                                        <th class="link-book"><a href=# onclick="return false;">Book Now</a></th>
-                                        <th class="symbol-book"><i class="fa fa-chevron-circle-right fa-2x"></i></th>
-                                    </tr>
-                                    <tr class="list-schedule last">
-                                        <th>September 8, 2019</th>
-                                        <th class="time">09.00 PM</th>
-                                        <th class="seats-availability">25 seats</th>
-                                        <th class="link-book"><a href=# onclick="return false;">Book Now</a></th>
-                                        <th class="symbol-book"><i class="fa fa-chevron-circle-right fa-2x"></i></th>
-                                    </tr>   
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- Review -->
-                        <div class="booking-message detail">
-                            <div class="modal-auth review-user">
-                                <p class="title-schedule">Reviews</p>
-                                <table>
-                                    <tr>
-                                        <th class="profile-pic"><i class="fa fa-user-circle fa-3x"></i></th>
-                                        <th class="review-message">
-                                            <div class="user-name">antonio.wahyu</div>
-                                            <div class="review star">
-                                                    <img class="star-icon rev" src="../assets/star-icon.png">
-                                                    <p class="rating"><span class="rate smaller">8.75</span><span class="per-rate">/10</span></p>
-                                            </div>
-                                            <div class="user-message">
-                                               <p class="spacing-review">
-                                                Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                                Possimus atque tempora dolore modi ducimus doloremque
-                                                </p> 
-                                            </div>
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <th class="profile-pic"><i class="fa fa-user-circle fa-3x"></i></th>
-                                        <th class="review-message">
-                                            <div class="user-name">antonio.wahyu</div>
-                                            <div class="review star">
-                                                    <img class="star-icon rev" src="../assets/star-icon.png">
-                                                    <p class="rating"><span class="rate smaller">8.75</span><span class="per-rate">/10</span></p>
-                                            </div>
-                                            <div class="user-message">
-                                                <p class="spacing-review">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                                    Possimus atque tempora dolore modi ducimus doloremque
-                                                </p> 
-                                            </div>
-                                        </th>
-                                    </tr>
-                                    <tr class="last">
-                                        <th class="profile-pic"><i class="fa fa-user-circle fa-3x"></i></th>
-                                        <th class="review-message">
-                                            <div class="user-name">antonio.wahyu</div>
-                                            <div class="review star">
-                                                    <img class="star-icon rev" src="../assets/star-icon.png">
-                                                    <p class="rating"><span class="rate smaller">8.75</span><span class="per-rate">/10</span></p>
-                                            </div>
-                                            <div class="user-message">
-                                                <p class="spacing-review">
-                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                                                    Possimus atque tempora dolore modi ducimus doloremque
-                                                </p> 
-                                            </div>
-                                        </th>
-                                    </tr>    
-                                </table>
-                                
-                            </div>
-                        </div>                     
-                    </div>
-                </div>
             </div>
             <!-- BORDER -->
             <div class="side-section-right"></div>
         </div>
         <script type="text/javascript" src="../script/script.js"></script>
+        <script type="module" src="../script/search.js"></script>
+        <script type="module" src="../script/logout.js"></script>
+        <script type="module" src="../script/detail.js"></script>
     </body> 
 </html>

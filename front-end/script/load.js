@@ -26,7 +26,7 @@ window.onclick = e => {
             getAllMoviesByKeyword(access_token, curr_page, keyword);
         }
     } else if (isMovieDetail(e.target.id)) {
-        window.location.href = FRONT_END_BASE_URL + "pages/detail.html?id=" + e.target.id;
+        window.location.href = FRONT_END_BASE_URL + "pages/movie_detail.html?id=" + e.target.id;
     }
 }
 
