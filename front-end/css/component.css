@@ -879,3 +879,168 @@ th .red{
 .link-book {
     cursor: pointer;
 }
+
+/* Transaction history */
+.edit-button {
+	background: #2FC815;
+	color: white;
+	border-radius: 4px;
+	border: 1px solid #2FC815;
+    font-size: 10px;
+    width: 100px;
+    height: 30px;
+    margin-left: 10px;
+}
+
+.delete-button {
+	background: red;
+	color: white;
+	border-radius: 4px;
+	border: 1px solid red;
+    font-size: 10px;
+    width: 100px;
+    height: 30px;
+    
+}
+
+.add-button {
+    background: rgb(0, 192, 236);
+	color: white;
+	border-radius: 4px;
+	border: 1px solid rgb(0, 192, 236);
+    font-size: 10px;
+    width: 100px;
+    height: 30px;
+}
+
+.button-transaction {
+    margin-top: 20.5%;
+    align-self: stretch;
+}
+
+.button-transaction a {
+    color: white;
+}
+
+.trans-desc-section {
+    display: block;
+    margin-left: 1.75rem;
+    width: 70%;
+    font-weight: 800;
+}
+
+.flex-button {
+    display: flex;
+}
+
+/* Rating */
+
+.fa-star:hover {
+	color: orange;
+}
+
+.rating-value {
+	color: grey;
+	font-size: 13px;
+}
+
+.blue-bold {
+	color: rgb(0, 192, 236);
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.black-bold {
+	color: black;
+	font-weight: bold;
+	font-size: 12px;
+	margin-left: 1em;
+}
+
+hr.black {
+	margin-top: 9.8em;
+	border: 1px solid grey;
+}
+
+.navbar-brand {
+	padding-left: 0.1rem;
+	font-size: 18px;
+}
+
+.detail-review {
+	background: white;
+	width: 60%;
+	height: 50%;
+	float: left;
+	margin-left: 1em;
+	margin-top: 2em;
+}
+
+.fa-angle-left {
+	color: rgb(0, 192, 236);
+	margin-right: 0.4em;
+}
+
+.userreview-judul {
+	font-size: 20px;
+}
+
+.userreview-content {
+	background: white;
+	float: left;
+	width: auto;
+	height: auto;
+	overflow: hidden;
+	margin-left: 10em;
+}
+
+.star-rating {
+	background: white;
+	float: left;
+	height: auto;
+	width: auto;
+	margin-left: 2em;
+
+}
+
+.userreview-font {
+	font-size: 16px;
+	float: left;
+}
+
+textarea {
+	height: 10em;
+	width: 40em;
+	resize: none;
+	margin-left: 0;
+	padding-left: 0;
+	font-family: 'Raleway';
+	font-size: 14px;
+	color: rgb(173, 173, 173);
+	border-radius: 4px;
+	border: 1px solid rgb(173, 173, 173);
+	box-sizing: border-box;
+}
+
+.userreview-button {
+	float: right;
+	height: auto;
+	background: rgb(0, 192, 236);
+	margin-top: 2em;
+}
+
+.userreview-cancel {
+	background: white;
+	border: 1px solid rgb(173, 173, 173);
+	border-radius: 4px;
+	height: 2em;
+	color: rgb(173, 173, 173);
+}
+
+.userreview-submit {
+	background: rgb(0, 192, 236);
+	border: 1px solid rgb(173, 173, 173);
+	border-radius: 4px;
+	height: 2em;
+	color: rgb(173, 173, 173);
+}

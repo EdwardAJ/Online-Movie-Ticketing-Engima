@@ -109,6 +109,7 @@ function handleBadResponse (response) {
 
 // Change error text in HTML, assign it with messages from the backend.
 function changeWrongContents (errorIDs) {
+    console.log(wrongID);
     Object.keys(errorIDs).forEach(wrongID => {
         document.getElementById(wrongID).innerHTML = errorIDs[wrongID];
     })

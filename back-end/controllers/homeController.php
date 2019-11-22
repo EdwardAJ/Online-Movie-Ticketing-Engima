@@ -112,7 +112,7 @@ class HomeController
                                 <p class="movie-title">'. $movie['nama'] . '</p>
                                 <div class="review">
                                     <img class="star-icon" src="../assets/star-icon.png">
-                                    <p> 8.5</p>
+                                    <p>'. $movie['rating'] .'</p>
                                 </div>
                             </div>
                         </a>';
@@ -137,7 +137,7 @@ class HomeController
             $html .=        '<h3>'. $movie['nama'] .'</h3>';
             $html .=        '<div class="review">
                                 <img class="star-icon" src="../assets/star-icon.png">
-                                <p class="review-score"> 8.5</p>
+                                <p class="review-score">' . $movie['rating'] . '</p>
                              </div>';
             $html .=        '<div class="synopsis">
                                 <p>'. $movie['sinopsis'] .'</p>

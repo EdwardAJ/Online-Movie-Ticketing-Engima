@@ -6,15 +6,19 @@ require_once 'models/seat.php';
 require_once 'models/user.php';
 require_once 'models/seat.php';
 require_once 'models/transaction.php';
+require_once 'models/schedule.php';
 
 use Models\Movie;
 use Models\User;
 use Models\Seat;
 use Models\Transaction;
+use Models\Schedule;
 
-class BioskopController {
+class BioskopController
+{
     private $transaction = [];
     private $seat = [];
+    private $movie = [];
     private $username;
     private function getHeaderAuth()
     {
@@ -85,7 +89,8 @@ class BioskopController {
         }
     }
 
-    public function split(Seat $seat, Transaction $transaction, $data, $connection){
+    public function split(Seat $seat, Transaction $transaction, $data, $connection)
+    {
         $transaction->id_seat = $data->id_seat;
         $transaction->id_schedule = $data->id_schedule;
         $seat->id_seat = $data->id_seat;
@@ -93,7 +98,8 @@ class BioskopController {
         $seat->harga = $data->harga;
     }
 
-    public function getTransactionID(User $user, $connection){
+    public function getTransactionID(User $user, $connection)
+    {
         $user->getTransactionID($connection);
     }
 
@@ -103,9 +109,10 @@ class BioskopController {
             $access_token = $this->getHeaderAuth();
             $user = new User($connection);
             $seat = new Seat($connection);
+            $schedule = new Schedule($connection);
             if ($this->validateAccessToken($user, $connection, $access_token)) {
                 if ($params['schedule']) { //if exist param, get all seat
-                    $this->getAllSeatStatus($connection, $params, $seat);
+                    $this->getAllAttributes($connection, $params, $seat, $schedule);
                 } else {
                     returnResponse('500', 'Invalid Params.');
                 }
@@ -116,45 +123,51 @@ class BioskopController {
     }
 
     
-    public function getAllSeatStatus ($connection, $params, Seat $seat)
+    public function getAllAttributes($connection, $params, Seat $seat, Schedule $schedule)
     {
         $seats_arr = $seat->getStatus($connection, $params);
-        if ($seats_arr != '500') {
-            $this->render($seats_arr);
+        $movie_arr = $schedule->getMovieOnSchedule($connection, $params);
+        if ($seats_arr != '500' && $movie_arr != '500') {
+            $this->render($seats_arr, $movie_arr);
         } else {
             returnResponse('500', 'Internal Server Error.');
         }
     }
 
-    public function render($seats_arr)
-    {   
+    public function render($seats_arr, $movie_arr)
+    {
         for ($i = 0; $i < 3; $i++) {
             $html .= '<div class="seat-row">';
             for ($j = $i*10 + 1; $j <= $i*10 + 10; $j++) {
                 if ($seats_arr[$j - 1]['status'] == 0) {
-                    $html .=  '<button class="seat" value ='.$j.' id="'.$j.'" type="submit"">'.$j.'</button>';
+                    $html .=  '<button class="seat" value ='.$j.' id='.$j.' type="submit"">'.$j.'</button>';
                 } else {
-                    $html .=  '<button class="seat" value ='.$j.' id="'.$j.'" type="submit" disabled">'.$j.'</button>';
+                    $html .=  '<button class="seat" value ='.$j.' id='.$j.' type="submit" disabled>'.$j.'</button>';
                 }
             }
             $html .= '</div>';
         }
-        returnResponse('200', $html);
+        $html .= '<div class="seat-row">';
+        $html .=       '<button class="screen-img" type="button" disabled>Screen</button>';
+        $html .=  '</div>';
+        returnBioskopResponse('200', $html, ($movie_arr[0]));
     }
 
-    public function insertInfoSeat (Seat $seat, $connection){
+    public function insertInfoSeat(Seat $seat, $connection)
+    {
         $result = $seat->submitSeat($connection);
-        if ($result === '200') {
+        if ($result == '200') {
             return true;
         } else {
             return false;
         }
     }
 
-    public function insertInfoTransaction ($username, Transaction $transaction, $connection){
+    public function insertInfoTransaction($username, Transaction $transaction, $connection)
+    {
         $transaction->username = $username;
         $result = $transaction->submitTransaction($connection);
-        if ($result === '200') {
+        if ($result =='200') {
             return true;
         } else {
             return false;
@@ -170,13 +183,12 @@ class BioskopController {
 // get row transaction bikin di transaction.php
 // masukin model transaction sama masukin model seat (seat.php)
 // controller getrow transaction
-// di model transaction buat getrow, 
+// di model transaction buat getrow,
 
 // DONE
 // buat insert transaction tapi this.row dulu brp trus insert values
 //  insert blabla
 // var row baru = this.getrow + 1 baru bawahnya insert values
-
 
 // kalo mau ambil join seat dengan schedule
 // fetch url windows.href parse sampe ketemu =

@@ -4,6 +4,8 @@ require_once 'controllers/userController.php';
 require_once 'controllers/homeController.php';
 require_once 'controllers/detailController.php';
 require_once 'controllers/bioskopController.php';
+require_once 'controllers/transactionController.php';
+require_once 'controllers/reviewController.php';
 
 class Router
 {

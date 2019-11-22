@@ -133,7 +133,7 @@ class DetailController
                                 </div>
                                 <div class="review">
                                         <img class="star-icon" src="../assets/star-icon.png">
-                                        <p class="rating"><span class="rate">8.75</span><span class="per-rate">/10</span></p>
+                                        <p class="rating"><span class="rate">'. $this->movie['rating'] . '</span><span class="per-rate">/10</span></p>
                                 </div>
                                 <div class="detail-summary">
                                     <p class="spacing"> '. $this->movie['sinopsis'] . ' </p>

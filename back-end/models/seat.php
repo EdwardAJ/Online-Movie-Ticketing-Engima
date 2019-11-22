@@ -1,5 +1,6 @@
 <?php namespace Models;
-error_reporting(0);
+
+// error_reporting(0);
 class Seat
 {
     private $connection;
@@ -18,8 +19,8 @@ class Seat
     public function submitSeat($database)
     {
         $query = "UPDATE " . $this->table
-                 . " SET id_seat = " . $this->id_seat. " WHERE id_schedule = '" . $this->id_schedule . "'AND harga = " . $this->harga .";";
-        echo $query;
+                 . " SET status = 1 WHERE id_schedule = '" . $this->id_schedule . "' AND id_seat = " . $this->id_seat .";";
+        // echo $query;
         if (mysqli_query($database, $query)) {
             return '200';
         } else {
@@ -27,9 +28,9 @@ class Seat
         }
     }
 
-    public function getStatus ($database, $params)
+    public function getStatus($database, $params)
     {
-        $query = "SELECT id_seat, harga, date, time, status FROM " . $this->table . " NATURAL JOIN " . 'engima.schedule' . " WHERE id_schedule ='". $params['schedule'] . "';";    
+        $query = "SELECT id_seat, harga, date, time, status FROM " . $this->table . " NATURAL JOIN " . 'engima.schedule' . " WHERE id_schedule ='". $params['schedule'] . "';";
         $execute = mysqli_query($database, $query);
         $result = mysqli_fetch_all($execute, MYSQLI_ASSOC);
         if ($result) {

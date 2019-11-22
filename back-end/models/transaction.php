@@ -19,7 +19,6 @@ class Transaction
         $this->getNewTransactionID($database);
         $query = "INSERT INTO " . $this->table
                  . " VALUES " . "(" . $this->id_transaction. ", '". $this->username. "', " . $this->id_seat . ", '" . $this->id_schedule ."')";
-        echo $query;
         if (mysqli_query($database, $query)) {
             return '200';
         } else {
@@ -29,9 +28,18 @@ class Transaction
 
     public function getNewTransactionID($database)
     {
-        $query = "SELECT count id_transaction FROM " . $this->table . "';";
+        $query = "SELECT COUNT(id_transaction) FROM " . $this->table . ";";
         $execute = mysqli_query($database, $query);
         $result = mysqli_fetch_array($execute);
         $this->id_transaction = $result[0] + 1;
+    }
+
+    public function getTransactionByUser($username, $database)
+    {
+        $query = "SELECT id_schedule, date, time, id_movie, nama, poster FROM engima.movie NATURAL JOIN engima.schedule NATURAL JOIN engima.transaction WHERE username = '". $username . "';" ;
+        // echo $query;
+        $execute = mysqli_query($database, $query);
+        $result = mysqli_fetch_all($execute, MYSQLI_ASSOC);
+        return $result;
     }
 }
